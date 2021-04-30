@@ -1,9 +1,5 @@
-import logo from "./logo.svg";
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-
-import "./App.css";
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
@@ -26,9 +22,4 @@ function App() {
   );
 }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+export default App;
