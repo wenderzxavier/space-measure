@@ -1,10 +1,10 @@
 {
   "files": {
     "app.css": "/space-measure/static/css/app.80233d70.chunk.css",
-    "app.js": "/space-measure/static/js/app.5dea729f.chunk.js",
-    "app.js.map": "/space-measure/static/js/app.5dea729f.chunk.js.map",
-    "index.js": "/space-measure/static/js/index.90f215fd.chunk.js",
-    "index.js.map": "/space-measure/static/js/index.90f215fd.chunk.js.map",
+    "app.js": "/space-measure/static/js/app.8ed05b94.chunk.js",
+    "app.js.map": "/space-measure/static/js/app.8ed05b94.chunk.js.map",
+    "index.js": "/space-measure/static/js/index.b3e65ddd.chunk.js",
+    "index.js.map": "/space-measure/static/js/index.b3e65ddd.chunk.js.map",
     "runtime-app.js": "/space-measure/static/js/runtime-app.5ee9d9c9.js",
     "runtime-app.js.map": "/space-measure/static/js/runtime-app.5ee9d9c9.js.map",
     "runtime-index.js": "/space-measure/static/js/runtime-index.e1c2c105.js",
@@ -19,10 +19,10 @@
   },
   "entrypoints": [
     "static/js/runtime-index.e1c2c105.js",
-    "static/js/index.90f215fd.chunk.js",
+    "static/js/index.b3e65ddd.chunk.js",
     "static/js/runtime-app.5ee9d9c9.js",
     "static/js/4.7a76c7fe.chunk.js",
     "static/css/app.80233d70.chunk.css",
-    "static/js/app.5dea729f.chunk.js"
+    "static/js/app.8ed05b94.chunk.js"
   ]
 }
