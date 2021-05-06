@@ -6,6 +6,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
+import { SHAPES, updateShapes } from "./Listeners/WidgetsUpdate";
+import { SHAPE } from "./constants";
 
 function App() {
   miro.onReady(() => {
@@ -16,20 +18,24 @@ function App() {
   });
 
   const handleClick = async () => {
-    let allStickers = await miro.board.widgets.get({ type: "shape" });
-    console.log(allStickers);
-    let allFrames = await miro.board.widgets.get({ type: "frame" });
-    console.log(allFrames);
-    let allCurves = await miro.board.widgets.get({ type: "curve" });
-    console.log(allCurves);
+    let allShapes = await miro.board.widgets.get({ type: SHAPE });
+    updateShapes(allShapes);
+    console.log(SHAPES);
+    // let allFrames = await miro.board.widgets.get({ type: "frame" });
+    // console.log(allFrames);
+    // let allCurves = await miro.board.widgets.get({ type: "curve" });
+    // console.log(allCurves);
+    // let allLines = await miro.board.widgets.get({ type: "line" });
+    // console.log(allLines);
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>App version 1.12</p>
+        <p>App version 1.15</p>
         <button onClick={() => handleClick()}>Click Here</button>
+        <button onClick={() => updateStyle()}>Change Style</button>
       </header>
     </div>
   );

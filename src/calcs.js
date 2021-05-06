@@ -15,3 +15,6 @@ export const updateShapeMetadata = async (widgetId) => {
     },
   });
 };
+
+export const calculateAreaForShape = () => {};
+export const calculatePerimeterForShape = () => {};
