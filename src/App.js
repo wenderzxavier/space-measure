@@ -6,7 +6,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
-import { SHAPES, updateShapes } from "./Listeners/WidgetsUpdate";
+import { SHAPES, updateLocalShapes } from "./Listeners/WidgetsUpdate";
 import { SHAPE } from "./constants";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
   const handleClick = async () => {
     let allShapes = await miro.board.widgets.get({ type: SHAPE });
-    updateShapes(allShapes);
+    updateLocalShapes(allShapes);
     console.log(SHAPES);
     // let allFrames = await miro.board.widgets.get({ type: "frame" });
     // console.log(allFrames);
