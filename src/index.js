@@ -1,6 +1,11 @@
 /* eslint-disable no-undef */
 // import { updateShapeMetadata } from "./calcs";
-// import * as constants from "./constants";
+import * as constants from "./constants";
+import { updateShapesAreaPerimeter } from "./Listeners/WidgetsUpdate";
+
+export const LOCAL_SHAPES = [];
+export const LOCAL_LINES = [];
+export const LOCAL_GROUPS = [];
 
 miro.onReady(async () => {
   const icon24 =
@@ -18,6 +23,12 @@ miro.onReady(async () => {
     },
   });
 
+  let allShapes = await miro.board.widgets.get({ type: constants.SHAPE });
+  console.log(allShapes);
+  let allLines = await miro.board.widgets.get({ type: constants.LINE });
+  console.log(allLines);
+
+  updateShapesAreaPerimeter(allShapes);
   //  = await miro.board.widgets.get({ type: "shape" });
 
   // miro.addListener("SELECTION_UPDATED", (event) => {

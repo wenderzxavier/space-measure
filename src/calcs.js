@@ -5,10 +5,6 @@ const parallelogramArea = (width, height) => width * height;
 
 const parallelogramPerimeter = (width, height) => width * 2 + height * 2;
 
-const squareArea = (width, height) => width * height;
-
-const squarePerimeter = (width, height) => width * 2 + height * 2;
-
 const ellipseArea = (horizontalDiameter, verticalDiameter, areaType) => {
   const verticalRadius = verticalDiameter / 2;
   const horizontalRadius = horizontalDiameter / 2;
@@ -58,31 +54,49 @@ const trianglePerimeter = (base, height, areaType) => {
   return perimeter;
 };
 
-export const updateShapeMetadata = async (widgetId) => {
-  const widget = await miro.board.widgets.get({ id: widgetId });
-  miro.board.widgets.update({
-    id: widget[0].id,
-    metadata: {
-      "3074457358398558776": {
-        area: squareArea(widget[0].width, widget[0].height),
-        perimeter: squarePerimeter(widget[0].width, widget[0].height),
-      },
-    },
-  });
-};
+// export const updateShapeMetadata = async (widgetId) => {
+//   const widget = await miro.board.widgets.get({ id: widgetId });
+//   miro.board.widgets.update({
+//     id: widget[0].id,
+//     metadata: {
+//       "3074457358398558776": {
+//         area: squareArea(widget[0].width, widget[0].height),
+//         perimeter: squarePerimeter(widget[0].width, widget[0].height),
+//       },
+//     },
+//   });
+// };
 
 export const calculateAreaForShape = (shape, width, height, areaType) => {
+  console.log(shape);
+  console.log(width);
+  console.log(height);
+  console.log(areaType);
   switch (shape) {
     case AVAILABLE_SHAPES.RECTANGLE:
-      return parallelogramArea();
+      return parallelogramArea(width, height);
     case AVAILABLE_SHAPES.TRIANGLE:
-      return triangleArea(areaType);
+      return triangleArea(width, height, areaType);
     case AVAILABLE_SHAPES.CIRCLE:
-      return ellipseArea(areaType);
+      return ellipseArea(width, height, areaType);
     case AVAILABLE_SHAPES.PARALLELOGRAM:
-      return parallelogramArea(areaType);
+      return parallelogramArea(width, height);
     default:
       return undefined;
   }
 };
-export const calculatePerimeterForShape = (shape, areaType) => {};
+
+export const calculatePerimeterForShape = (shape, width, height, areaType) => {
+  switch (shape) {
+    case AVAILABLE_SHAPES.RECTANGLE:
+      return parallelogramPerimeter(width, height);
+    case AVAILABLE_SHAPES.TRIANGLE:
+      return trianglePerimeter(width, height, areaType);
+    case AVAILABLE_SHAPES.CIRCLE:
+      return ellipsePerimeter(width, height, areaType);
+    case AVAILABLE_SHAPES.PARALLELOGRAM:
+      return parallelogramPerimeter(width, height);
+    default:
+      return undefined;
+  }
+};
