@@ -5,17 +5,22 @@ import {
   FULL,
   AVAILABLE_AREA_TYPES,
 } from "../constants";
-import { calculateAreaForShape, calculatePerimeterForShape } from "../calcs";
-import { LOCAL_SHAPES } from "..";
+import {
+  calculateAreaForShape,
+  calculateLength,
+  calculatePerimeterForShape,
+} from "../calcs";
 
-const updateMiroShape = (id, area, perimeter, areaType) => {
+export const LOCAL_SHAPES = [];
+export const LOCAL_LINES = [];
+export const LOCAL_GROUPS = [];
+
+const updateMiroShape = (id, metadata) => {
   miro.board.widgets.update({
     id,
     metadata: {
       [APP_ID]: {
-        area,
-        perimeter,
-        areaType,
+        ...metadata,
       },
     },
   });
@@ -68,13 +73,33 @@ export const updateShapesAreaPerimeter = (widgets) => {
         perimeter !== calculatedPerimeter ||
         widget.metadata[APP_ID].areaType !== areaType
       ) {
-        updateMiroShape(
-          widget.id,
+        updateMiroShape(widget.id, {
           calculatedArea,
           calculatedPerimeter,
-          areaType
-        );
+          areaType,
+        });
       }
+    }
+  });
+};
+
+export const updateLinesLengths = (widgets) => {
+  LOCAL_LINES.splice(0, LOCAL_LINES.length);
+
+  widgets.forEach((widget) => {
+    let length = widget.metadata[APP_ID]?.length || 0;
+
+    const { startPosition, endPosition } = widget;
+
+    const calculatedLength = calculateLength(
+      startPosition.x,
+      startPosition.y,
+      endPosition.x,
+      endPosition.y
+    );
+
+    if (calculatedLength !== length) {
+      updateMiroShape(widget.id, { length: calculatedLength });
     }
   });
 };

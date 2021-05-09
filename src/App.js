@@ -7,7 +7,6 @@ import ReactDOM from "react-dom";
 
 import "./index.css";
 import { SHAPE } from "./constants";
-import { LOCAL_SHAPES } from "./";
 
 function App() {
   miro.onReady(() => {
@@ -20,14 +19,6 @@ function App() {
   const handleClick = async () => {
     let allShapes = await miro.board.widgets.get({ type: SHAPE });
     console.log(allShapes);
-    console.log("LOCAL SHAPES");
-    console.log(LOCAL_SHAPES);
-    // let allFrames = await miro.board.widgets.get({ type: "frame" });
-    // console.log(allFrames);
-    // let allCurves = await miro.board.widgets.get({ type: "curve" });
-    // console.log(allCurves);
-    // let allLines = await miro.board.widgets.get({ type: "line" });
-    // console.log(allLines);
   };
 
   return (
@@ -35,6 +26,14 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>App version 1.15</p>
+        <button>Create Full Ellipse</button>
+        <button>Create Half Ellipse</button>
+        <button>Create Quarter Ellipse</button>
+        <button>Create Full Quadrilateral</button>
+        <button>Create Full Parallelogram</button>
+        <button>Create Half Parallelogram</button>
+        <button>Create Full Triangle</button>
+        <button>Create Half Triangle</button>
         <button onClick={() => handleClick()}>Click Here</button>
         <button onClick={() => updateStyle()}>Change Style</button>
       </header>
