@@ -6,14 +6,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
-import { SHAPE } from "./constants";
+import { FULL, HALF, QUARTER, SHAPE } from "./constants";
 
 import {
   LOCAL_SHAPES,
   LOCAL_LINES,
   LOCAL_GROUPS,
 } from "./Listeners/WidgetsUpdate";
-import { createFullEllipse } from "./Listeners/WidgetsCreated";
+import { createEllipse } from "./Listeners/WidgetsCreated";
 
 function App() {
   miro.onReady(() => {
@@ -37,9 +37,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>App version 1.15</p>
-        <button onClick={() => createFullEllipse()}>Create Full Ellipse</button>
-        <button>Create Half Ellipse</button>
-        <button>Create Quarter Ellipse</button>
+        <button onClick={() => createEllipse(FULL)}>Create Full Ellipse</button>
+        <button onClick={() => createEllipse(HALF)}>Create Half Ellipse</button>
+        <button onClick={() => createEllipse(QUARTER)}>Create Quarter Ellipse</button>
         <button>Create Full Quadrilateral</button>
         <button>Create Full Parallelogram</button>
         <button>Create Half Parallelogram</button>
