@@ -4,6 +4,7 @@ import * as constants from "./constants";
 import {
   updateLinesLengths,
   updateShapesAreaPerimeter,
+  LOCAL_GROUPS,
 } from "./Listeners/WidgetsUpdate";
 
 miro.onReady(async () => {
@@ -29,6 +30,8 @@ miro.onReady(async () => {
 
   updateShapesAreaPerimeter(allShapes);
   updateLinesLengths(allLines);
+
+  console.log(LOCAL_GROUPS);
   //  = await miro.board.widgets.get({ type: "shape" });
 
   // miro.addListener("SELECTION_UPDATED", (event) => {

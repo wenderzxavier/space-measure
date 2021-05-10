@@ -8,6 +8,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { SHAPE } from "./constants";
 
+import {
+  LOCAL_SHAPES,
+  LOCAL_LINES,
+  LOCAL_GROUPS,
+} from "./Listeners/WidgetsUpdate";
+import { createFullEllipse } from "./Listeners/WidgetsCreated";
+
 function App() {
   miro.onReady(() => {
     miro.addListener("SELECTION_UPDATED", (widget) => {
@@ -15,6 +22,10 @@ function App() {
       console.log(widget);
     });
   });
+
+  console.log(LOCAL_SHAPES);
+  console.log(LOCAL_LINES);
+  console.log(LOCAL_GROUPS);
 
   const handleClick = async () => {
     let allShapes = await miro.board.widgets.get({ type: SHAPE });
@@ -26,7 +37,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>App version 1.15</p>
-        <button>Create Full Ellipse</button>
+        <button onClick={() => createFullEllipse()}>Create Full Ellipse</button>
         <button>Create Half Ellipse</button>
         <button>Create Quarter Ellipse</button>
         <button>Create Full Quadrilateral</button>

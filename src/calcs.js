@@ -71,16 +71,12 @@ export const calculateLength = (x1, y1, x2, y2) =>
   Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
 export const calculateAreaForShape = (shape, width, height, areaType) => {
-  console.log(shape);
-  console.log(width);
-  console.log(height);
-  console.log(areaType);
   switch (shape) {
     case AVAILABLE_SHAPES.RECTANGLE:
       return parallelogramArea(width, height);
     case AVAILABLE_SHAPES.TRIANGLE:
       return triangleArea(width, height, areaType);
-    case AVAILABLE_SHAPES.CIRCLE:
+    case AVAILABLE_SHAPES.ELLIPSE:
       return ellipseArea(width, height, areaType);
     case AVAILABLE_SHAPES.PARALLELOGRAM:
       return parallelogramArea(width, height);
@@ -95,7 +91,7 @@ export const calculatePerimeterForShape = (shape, width, height, areaType) => {
       return parallelogramPerimeter(width, height);
     case AVAILABLE_SHAPES.TRIANGLE:
       return trianglePerimeter(width, height, areaType);
-    case AVAILABLE_SHAPES.CIRCLE:
+    case AVAILABLE_SHAPES.ELLIPSE:
       return ellipsePerimeter(width, height, areaType);
     case AVAILABLE_SHAPES.PARALLELOGRAM:
       return parallelogramPerimeter(width, height);

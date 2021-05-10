@@ -66,7 +66,10 @@ export const updateShapesAreaPerimeter = (widgets) => {
 
       updateLocalShapes(widget, areaType, calculatedArea, calculatedPerimeter);
 
-      console.log(LOCAL_SHAPES);
+      if (widget.groupId) {
+        const currentArea = LOCAL_GROUPS[widget.groupId] || 0;
+        LOCAL_GROUPS[widget.groupId] = currentArea + calculatedArea;
+      }
 
       if (
         area !== calculatedArea ||
