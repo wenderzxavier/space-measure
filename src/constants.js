@@ -11,3 +11,9 @@ export const AVAILABLE_SHAPES = {
   TRIANGLE: 5,
   PARALLELOGRAM: 10,
 };
+export const SHAPE_NAME = {
+  3: "Rectangle",
+  4: "Ellipse",
+  5: "Triangle",
+  10: "Parallelogram",
+};

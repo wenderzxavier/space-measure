@@ -6,14 +6,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
-import { FULL, HALF, QUARTER, SHAPE } from "./constants";
+import { AVAILABLE_SHAPES, FULL, HALF, QUARTER, SHAPE } from "./constants";
 
 import {
   LOCAL_SHAPES,
   LOCAL_LINES,
   LOCAL_GROUPS,
 } from "./Listeners/WidgetsUpdate";
-import { createEllipse } from "./Listeners/WidgetsCreated";
+import { createShape } from "./Listeners/WidgetsCreated";
 
 function App() {
   miro.onReady(() => {
@@ -37,14 +37,34 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>App version 1.15</p>
-        <button onClick={() => createEllipse(FULL)}>Create Full Ellipse</button>
-        <button onClick={() => createEllipse(HALF)}>Create Half Ellipse</button>
-        <button onClick={() => createEllipse(QUARTER)}>Create Quarter Ellipse</button>
-        <button>Create Full Quadrilateral</button>
-        <button>Create Full Parallelogram</button>
-        <button>Create Half Parallelogram</button>
-        <button>Create Full Triangle</button>
-        <button>Create Half Triangle</button>
+        <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.ELLIPSE)}>
+          Create Full Ellipse
+        </button>
+        <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.ELLIPSE)}>
+          Create Half Ellipse
+        </button>
+        <button onClick={() => createShape(QUARTER, AVAILABLE_SHAPES.ELLIPSE)}>
+          Create Quarter Ellipse
+        </button>
+        <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.RECTANGLE)}>
+          Create Full Quadrilateral
+        </button>
+        <button
+          onClick={() => createShape(FULL, AVAILABLE_SHAPES.PARALLELOGRAM)}
+        >
+          Create Full Parallelogram
+        </button>
+        <button
+          onClick={() => createShape(HALF, AVAILABLE_SHAPES.PARALLELOGRAM)}
+        >
+          Create Half Parallelogram
+        </button>
+        <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.TRIANGLE)}>
+          Create Full Triangle
+        </button>
+        <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.TRIANGLE)}>
+          Create Half Triangle
+        </button>
         <button onClick={() => handleClick()}>Click Here</button>
         <button onClick={() => updateStyle()}>Change Style</button>
       </header>
