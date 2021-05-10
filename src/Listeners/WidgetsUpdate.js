@@ -10,6 +10,7 @@ import {
   calculateLength,
   calculatePerimeterForShape,
 } from "../calcs";
+import { isShapeAvailable } from "../utils";
 
 // export const LOCAL_SHAPES = [];
 // export const LOCAL_LINES = [];
@@ -43,21 +44,22 @@ export const updateShapesAreaPerimeter = (widgets) => {
     let areaType = widget.metadata[APP_ID]?.areaType || FULL;
     let area = widget.metadata[APP_ID]?.area || 0;
     let perimeter = widget.metadata[APP_ID]?.perimeter || 0;
+    let shapeType = widget.style.shapeType || undefined;
 
     if (!AVAILABLE_AREA_TYPES.includes(areaType)) {
       areaType = FULL;
     }
 
-    if (Object.values(AVAILABLE_SHAPES).includes(widget.style.shapeType)) {
+    if (isShapeAvailable(shapeType)) {
       const calculatedArea = calculateAreaForShape(
-        widget.style.shapeType,
+        shapeType,
         widget.width,
         widget.height,
         areaType
       );
 
       const calculatedPerimeter = calculatePerimeterForShape(
-        widget.style.shapeType,
+        shapeType,
         widget.width,
         widget.height,
         areaType
@@ -74,6 +76,7 @@ export const updateShapesAreaPerimeter = (widgets) => {
           area: calculatedArea,
           perimeter: calculatedPerimeter,
           areaType,
+          shapeType
         });
       }
     }

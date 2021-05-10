@@ -2,6 +2,7 @@
 // import { updateShapeMetadata } from "./calcs";
 import * as constants from "./constants";
 import { addMetadataToWidget } from "./Listeners/WidgetsCreated";
+import { widgetTransformationUpdateMetadata } from "./Listeners/WidgetsTransformationUpdated";
 import {
   updateLinesLengths,
   updateShapesAreaPerimeter,
@@ -67,6 +68,11 @@ miro.onReady(async () => {
 
   miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (event) => {
     console.log(event);
+    try {
+      widgetTransformationUpdateMetadata(event.data);
+    } catch (error) {
+      console.warn(error);
+    }
   });
 
   // miro.addListener("WIDGETS_DELETED", (event) => {

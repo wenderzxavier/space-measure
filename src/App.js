@@ -6,7 +6,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
-import { AVAILABLE_SHAPES, FULL, HALF, QUARTER, SHAPE } from "./constants";
+import { AVAILABLE_SHAPES, FULL, HALF, LINE, QUARTER, SHAPE } from "./constants";
 
 import { createShape } from "./Listeners/WidgetsCreated";
 
@@ -22,7 +22,7 @@ function App() {
     let allShapes = await miro.board.widgets.get({ type: SHAPE });
     console.log(allShapes);
 
-    let allLines = await miro.board.widgets.get({ type: constants.LINE });
+    let allLines = await miro.board.widgets.get({ type: LINE });
     console.log(allLines);
   };
 

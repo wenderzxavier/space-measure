@@ -12,13 +12,14 @@ import {
   FULL,
   SHAPE_NAME,
 } from "../constants";
+import { isShapeAvailable } from "../utils";
 
 const WIDTH = 200;
 const HEIGHT = 200;
 
 const addMetadataToShape = async (widgetId) => {
   const widget = (await miro.board.widgets.get({ id: widgetId }))[0];
-  if (Object.values(AVAILABLE_SHAPES).includes(widget.style.shapeType)) {
+  if (isShapeAvailable(widget.style.shapeType)) {
     const area = calculateAreaForShape(
       widget.style.shapeType,
       widget.width,
@@ -40,6 +41,7 @@ const addMetadataToShape = async (widgetId) => {
           area,
           perimeter,
           areaType: FULL,
+          shapeType: widget.style.shapeType,
         },
       },
     });
@@ -84,6 +86,7 @@ export const createShape = async (
         area: calculateAreaForShape(shape, WIDTH, HEIGHT, areaType),
         perimeter: calculatePerimeterForShape(shape, WIDTH, HEIGHT, areaType),
         areaType: areaType,
+        shapeType: shape
       },
     },
     style: {
@@ -108,5 +111,5 @@ export const addMetadataToWidget = (widgetId, widgetType) => {
     return addMetadataToLine(widgetId);
   }
 
-  return throws("Widget not supported on SpaceMeasure.");
+  throw new Error("Widget not supported on SpaceMeasure.");
 };
