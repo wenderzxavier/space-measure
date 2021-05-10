@@ -8,11 +8,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { AVAILABLE_SHAPES, FULL, HALF, QUARTER, SHAPE } from "./constants";
 
-import {
-  LOCAL_SHAPES,
-  LOCAL_LINES,
-  LOCAL_GROUPS,
-} from "./Listeners/WidgetsUpdate";
 import { createShape } from "./Listeners/WidgetsCreated";
 
 function App() {
@@ -23,13 +18,12 @@ function App() {
     });
   });
 
-  console.log(LOCAL_SHAPES);
-  console.log(LOCAL_LINES);
-  console.log(LOCAL_GROUPS);
-
   const handleClick = async () => {
     let allShapes = await miro.board.widgets.get({ type: SHAPE });
     console.log(allShapes);
+
+    let allLines = await miro.board.widgets.get({ type: constants.LINE });
+    console.log(allLines);
   };
 
   return (

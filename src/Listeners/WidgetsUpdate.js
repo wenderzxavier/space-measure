@@ -11,9 +11,9 @@ import {
   calculatePerimeterForShape,
 } from "../calcs";
 
-export const LOCAL_SHAPES = [];
-export const LOCAL_LINES = [];
-export const LOCAL_GROUPS = [];
+// export const LOCAL_SHAPES = [];
+// export const LOCAL_LINES = [];
+// export const LOCAL_GROUPS = [];
 
 const updateMiroShape = (id, metadata) => {
   miro.board.widgets.update({
@@ -26,20 +26,19 @@ const updateMiroShape = (id, metadata) => {
   });
 };
 
-const updateLocalShapes = (widget, areaType, area, perimeter) =>
-  LOCAL_SHAPES.push({
-    id: widget.id,
-    areaType,
-    area,
-    perimeter,
-    width: widget.width,
-    height: widget.height,
-    groupId: widget.groupId,
-    shapeType: widget.style.shapeType,
-  });
+// const updateLocalShapes = (widget, areaType, area, perimeter) =>
+//   LOCAL_SHAPES.push({
+//     id: widget.id,
+//     areaType,
+//     area,
+//     perimeter,
+//     width: widget.width,
+//     height: widget.height,
+//     groupId: widget.groupId,
+//     shapeType: widget.style.shapeType,
+//   });
 
 export const updateShapesAreaPerimeter = (widgets) => {
-  LOCAL_SHAPES.splice(0, LOCAL_SHAPES.length);
   widgets.forEach((widget) => {
     let areaType = widget.metadata[APP_ID]?.areaType || FULL;
     let area = widget.metadata[APP_ID]?.area || 0;
@@ -64,12 +63,7 @@ export const updateShapesAreaPerimeter = (widgets) => {
         areaType
       );
 
-      updateLocalShapes(widget, areaType, calculatedArea, calculatedPerimeter);
-
-      if (widget.groupId) {
-        const currentArea = LOCAL_GROUPS[widget.groupId] || 0;
-        LOCAL_GROUPS[widget.groupId] = currentArea + calculatedArea;
-      }
+      // updateLocalShapes(widget, areaType, calculatedArea, calculatedPerimeter);
 
       if (
         area !== calculatedArea ||
@@ -77,8 +71,8 @@ export const updateShapesAreaPerimeter = (widgets) => {
         widget.metadata[APP_ID].areaType !== areaType
       ) {
         updateMiroShape(widget.id, {
-          calculatedArea,
-          calculatedPerimeter,
+          area: calculatedArea,
+          perimeter: calculatedPerimeter,
           areaType,
         });
       }
@@ -87,8 +81,6 @@ export const updateShapesAreaPerimeter = (widgets) => {
 };
 
 export const updateLinesLengths = (widgets) => {
-  LOCAL_LINES.splice(0, LOCAL_LINES.length);
-
   widgets.forEach((widget) => {
     let length = widget.metadata[APP_ID]?.length || 0;
 

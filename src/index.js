@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 // import { updateShapeMetadata } from "./calcs";
 import * as constants from "./constants";
+import { addMetadataToWidget } from "./Listeners/WidgetsCreated";
 import {
   updateLinesLengths,
   updateShapesAreaPerimeter,
-  LOCAL_GROUPS,
 } from "./Listeners/WidgetsUpdate";
 
 miro.onReady(async () => {
@@ -20,18 +20,28 @@ miro.onReady(async () => {
           miro.board.ui.openLeftSidebar("app.html");
         },
       },
+      getWidgetMenuItems: (widgets) => {
+        console.log(widgets);
+        return Promise.resolve([
+          {
+            tooltip: "Space Measure",
+            svgIcon: icon24,
+            onClick: async (widgets) => {
+              console.log(widgets);
+            },
+          },
+        ]);
+      },
     },
   });
 
   let allShapes = await miro.board.widgets.get({ type: constants.SHAPE });
-  console.log(allShapes);
   let allLines = await miro.board.widgets.get({ type: constants.LINE });
-  console.log(allLines);
 
   updateShapesAreaPerimeter(allShapes);
   updateLinesLengths(allLines);
 
-  console.log(LOCAL_GROUPS);
+  // console.log(LOCAL_GROUPS);
   //  = await miro.board.widgets.get({ type: "shape" });
 
   // miro.addListener("SELECTION_UPDATED", (event) => {
@@ -44,12 +54,20 @@ miro.onReady(async () => {
   //   });
   // });
 
-  // miro.addListener("WIDGETS_CREATED", (event) => {
-  //   console.log("WIDGETS_CREATED");
-  //   if (event.data[0].type === constants.SHAPE) {
-  //     updateShapeMetadata(event.data[0].id);
-  //   }
-  // });
+  miro.addListener("WIDGETS_CREATED", (event) => {
+    try {
+      const widget = event.data[0];
+      if (!widget.metadata[constants.APP_ID]) {
+        addMetadataToWidget(widget.id, widget.type);
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+  });
+
+  miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (event) => {
+    console.log(event);
+  });
 
   // miro.addListener("WIDGETS_DELETED", (event) => {
   //   console.log(event);
