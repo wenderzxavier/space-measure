@@ -42,6 +42,11 @@ miro.onReady(async () => {
   updateShapesAreaPerimeter(allShapes);
   updateLinesLengths(allLines);
 
+  setInterval(() => {
+    console.log("SCALE INDEX");
+    console.log(localStorage.getItem(`${constants.APP_ID}/scale`));
+  }, 5000);
+
   // console.log(LOCAL_GROUPS);
   //  = await miro.board.widgets.get({ type: "shape" });
 

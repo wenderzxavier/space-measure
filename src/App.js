@@ -6,7 +6,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
-import { AVAILABLE_SHAPES, FULL, HALF, LINE, QUARTER, SHAPE } from "./constants";
+import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, LINE, QUARTER, SHAPE } from "./constants";
 
 import { createShape } from "./Listeners/WidgetsCreated";
 
@@ -25,6 +25,11 @@ function App() {
     let allLines = await miro.board.widgets.get({ type: LINE });
     console.log(allLines);
   };
+
+  setInterval(() => {
+    console.log("SCALE APP");
+    console.log(localStorage.getItem(`${APP_ID}/scale`));
+  }, 5000);
 
   return (
     <div className="App">
@@ -60,7 +65,7 @@ function App() {
           Create Half Triangle
         </button>
         <button onClick={() => handleClick()}>Click Here</button>
-        <button onClick={() => updateStyle()}>Change Style</button>
+        <button onClick={() => localStorage.setItem(`${APP_ID}/scale`, "1:1")}>Add To local Shape</button>
       </header>
     </div>
   );

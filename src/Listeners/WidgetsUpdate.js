@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import {
-  AVAILABLE_SHAPES,
   APP_ID,
   FULL,
   AVAILABLE_AREA_TYPES,
