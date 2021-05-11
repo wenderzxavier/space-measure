@@ -1,14 +1,22 @@
 /* eslint-disable no-undef */
 import logo from "./logo.svg";
-import "./app.css";
+import "./styles/app.css";
 
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "./index.css";
-import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, LINE, QUARTER, SHAPE } from "./constants";
+import "./styles/index.css";
+import {
+  APP_ID,
+  AVAILABLE_SHAPES,
+  FULL,
+  HALF,
+  LINE,
+  QUARTER,
+  SHAPE,
+} from "./utils/constants";
 
-import { createShape } from "./Listeners/WidgetsCreated";
+import { createShape } from "./widgetEvents/WidgetsCreated";
 
 function App() {
   miro.onReady(() => {
@@ -25,11 +33,6 @@ function App() {
     let allLines = await miro.board.widgets.get({ type: LINE });
     console.log(allLines);
   };
-
-  setInterval(() => {
-    console.log("SCALE APP");
-    console.log(localStorage.getItem(`${APP_ID}/scale`));
-  }, 5000);
 
   return (
     <div className="App">
@@ -65,7 +68,9 @@ function App() {
           Create Half Triangle
         </button>
         <button onClick={() => handleClick()}>Click Here</button>
-        <button onClick={() => localStorage.setItem(`${APP_ID}/scale`, "1:1")}>Add To local Shape</button>
+        <button onClick={() => localStorage.setItem(`${APP_ID}/scale`, "1:1")}>
+          Add To local Shape
+        </button>
       </header>
     </div>
   );

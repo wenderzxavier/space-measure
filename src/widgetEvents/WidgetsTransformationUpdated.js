@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import { LINE, SHAPE } from "../constants";
+import { LINE, SHAPE } from "../utils/constants";
 import { updateLinesLengths, updateShapesAreaPerimeter } from "./WidgetsUpdate";
 
-export const widgetTransformationUpdateMetadata = async (widgets) => {
+const widgetTransformationUpdateMetadata = async (widgets) => {
   const widgetsIDs = widgets.reduce(
     (ids, currentWidget) => {
       if (currentWidget.type === SHAPE) {
@@ -52,3 +52,12 @@ export const widgetTransformationUpdateMetadata = async (widgets) => {
     updateLinesLengths(linesToUpdate);
   }
 };
+
+export const initWidgetTransformatioUpdated = () =>
+  miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (event) => {
+    try {
+      widgetTransformationUpdateMetadata(event.data);
+    } catch (error) {
+      console.warn(error);
+    }
+  });

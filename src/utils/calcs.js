@@ -54,19 +54,6 @@ const trianglePerimeter = (base, height, areaType) => {
   return perimeter;
 };
 
-// export const updateShapeMetadata = async (widgetId) => {
-//   const widget = await miro.board.widgets.get({ id: widgetId });
-//   miro.board.widgets.update({
-//     id: widget[0].id,
-//     metadata: {
-//       "3074457358398558776": {
-//         area: squareArea(widget[0].width, widget[0].height),
-//         perimeter: squarePerimeter(widget[0].width, widget[0].height),
-//       },
-//     },
-//   });
-// };
-
 export const calculateLength = (x1, y1, x2, y2) =>
   Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 

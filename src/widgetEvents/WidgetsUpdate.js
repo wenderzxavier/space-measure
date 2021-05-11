@@ -1,19 +1,11 @@
 /* eslint-disable no-undef */
-import {
-  APP_ID,
-  FULL,
-  AVAILABLE_AREA_TYPES,
-} from "../constants";
+import { APP_ID, FULL, AVAILABLE_AREA_TYPES } from "../utils/constants";
 import {
   calculateAreaForShape,
   calculateLength,
   calculatePerimeterForShape,
-} from "../calcs";
+} from "../utils/calcs";
 import { isShapeAvailable } from "../utils";
-
-// export const LOCAL_SHAPES = [];
-// export const LOCAL_LINES = [];
-// export const LOCAL_GROUPS = [];
 
 const updateMiroShape = (id, metadata) => {
   miro.board.widgets.update({
@@ -25,18 +17,6 @@ const updateMiroShape = (id, metadata) => {
     },
   });
 };
-
-// const updateLocalShapes = (widget, areaType, area, perimeter) =>
-//   LOCAL_SHAPES.push({
-//     id: widget.id,
-//     areaType,
-//     area,
-//     perimeter,
-//     width: widget.width,
-//     height: widget.height,
-//     groupId: widget.groupId,
-//     shapeType: widget.style.shapeType,
-//   });
 
 export const updateShapesAreaPerimeter = (widgets) => {
   widgets.forEach((widget) => {
@@ -64,8 +44,6 @@ export const updateShapesAreaPerimeter = (widgets) => {
         areaType
       );
 
-      // updateLocalShapes(widget, areaType, calculatedArea, calculatedPerimeter);
-
       if (
         area !== calculatedArea ||
         perimeter !== calculatedPerimeter ||
@@ -75,7 +53,7 @@ export const updateShapesAreaPerimeter = (widgets) => {
           area: calculatedArea,
           perimeter: calculatedPerimeter,
           areaType,
-          shapeType
+          shapeType,
         });
       }
     }

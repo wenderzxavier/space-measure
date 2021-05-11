@@ -3,7 +3,7 @@ import {
   calculateAreaForShape,
   calculateLength,
   calculatePerimeterForShape,
-} from "../calcs";
+} from "../utils/calcs";
 import {
   APP_ID,
   AVAILABLE_SHAPES,
@@ -11,7 +11,7 @@ import {
   SHAPE,
   FULL,
   SHAPE_NAME,
-} from "../constants";
+} from "../utils/constants";
 import { isShapeAvailable } from "../utils";
 
 const WIDTH = 200;
@@ -86,12 +86,12 @@ export const createShape = async (
         area: calculateAreaForShape(shape, WIDTH, HEIGHT, areaType),
         perimeter: calculatePerimeterForShape(shape, WIDTH, HEIGHT, areaType),
         areaType: areaType,
-        shapeType: shape
+        shapeType: shape,
       },
     },
     style: {
       shapeType: shape,
-      borderStyle: 1,
+      borderStyle: areaType === FULL ? 2 : 1,
     },
     x: positionX,
     y: positionY,
@@ -102,7 +102,7 @@ export const createShape = async (
   });
 };
 
-export const addMetadataToWidget = (widgetId, widgetType) => {
+const addMetadataToWidget = (widgetId, widgetType) => {
   if (widgetType === SHAPE) {
     return addMetadataToShape(widgetId);
   }
@@ -113,3 +113,15 @@ export const addMetadataToWidget = (widgetId, widgetType) => {
 
   throw new Error("Widget not supported on SpaceMeasure.");
 };
+
+export const initWidgetsCreatedListener = () =>
+  miro.addListener("WIDGETS_CREATED", (event) => {
+    try {
+      const widget = event.data[0];
+      if (!widget.metadata[APP_ID]) {
+        addMetadataToWidget(widget.id, widget.type);
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+  });
