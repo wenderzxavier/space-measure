@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/styles/app.css"],"names":[],"mappings":"AAAA,sBACE,UAAW,CACX,WACF,CAEA,wBACE,oBAAa,CAAb,YAAa,CACb,0BAAmB,CAAnB,kBACF","file":"app.7b190339.chunk.css","sourcesContent":[".widget-creation-icon {\n  width: 2rem;\n  height: auto;\n}\n\n.widget-creation button {\n  display: flex;\n  align-items: center;\n}\n"]}
