@@ -54,6 +54,9 @@ export const SCALES = {
 };
 
 export const SCALE_UNITS = {
+  "Kilometers (Metric System)": "km",
   "Meters (Metric System)": "m",
+  "Centimeters (Metric System)": "cm",
+  "Milimeterrs (Metric System)": "mm",
   "Feet (Imperial System)": "ft",
 };
