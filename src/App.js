@@ -1,22 +1,11 @@
 /* eslint-disable no-undef */
-import logo from "./logo.svg";
-import "./styles/app.css";
-
 import React from "react";
 import ReactDOM from "react-dom";
+import { WidgetCreationButtons } from "./apps/sidebar";
 
-import "./styles/index.css";
-import {
-  APP_ID,
-  AVAILABLE_SHAPES,
-  FULL,
-  HALF,
-  LINE,
-  QUARTER,
-  SHAPE,
-} from "./utils/constants";
+import "./styles/app.scss";
 
-import { createShape } from "./widgetEvents/WidgetsCreated";
+// import { LINE, SHAPE } from "./utils/constants";
 
 function App() {
   miro.onReady(() => {
@@ -26,52 +15,17 @@ function App() {
     });
   });
 
-  const handleClick = async () => {
-    let allShapes = await miro.board.widgets.get({ type: SHAPE });
-    console.log(allShapes);
+  // const handleClick = async () => {
+  //   let allShapes = await miro.board.widgets.get({ type: SHAPE });
+  //   console.log(allShapes);
 
-    let allLines = await miro.board.widgets.get({ type: LINE });
-    console.log(allLines);
-  };
+  //   let allLines = await miro.board.widgets.get({ type: LINE });
+  //   console.log(allLines);
+  // };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>App version 1.15</p>
-        <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.ELLIPSE)}>
-          Create Full Ellipse
-        </button>
-        <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.ELLIPSE)}>
-          Create Half Ellipse
-        </button>
-        <button onClick={() => createShape(QUARTER, AVAILABLE_SHAPES.ELLIPSE)}>
-          Create Quarter Ellipse
-        </button>
-        <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.RECTANGLE)}>
-          Create Full Quadrilateral
-        </button>
-        <button
-          onClick={() => createShape(FULL, AVAILABLE_SHAPES.PARALLELOGRAM)}
-        >
-          Create Full Parallelogram
-        </button>
-        <button
-          onClick={() => createShape(HALF, AVAILABLE_SHAPES.PARALLELOGRAM)}
-        >
-          Create Half Parallelogram
-        </button>
-        <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.TRIANGLE)}>
-          Create Full Triangle
-        </button>
-        <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.TRIANGLE)}>
-          Create Half Triangle
-        </button>
-        <button onClick={() => handleClick()}>Click Here</button>
-        <button onClick={() => localStorage.setItem(`${APP_ID}/scale`, "1:1")}>
-          Add To local Shape
-        </button>
-      </header>
+      <WidgetCreationButtons />
     </div>
   );
 }

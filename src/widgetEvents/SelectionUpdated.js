@@ -7,9 +7,6 @@ export const infoForMenuItem = (widgets = []) => {
     widget.metadata.hasOwnProperty(APP_ID)
   );
 
-  console.log("widgetsWithMetadata");
-  console.log(widgetsWithMetadata);
-
   if (widgetsWithMetadata.length === 0) {
     return null;
   }

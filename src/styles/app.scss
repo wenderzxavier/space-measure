@@ -1,0 +1,11 @@
+.widget-creation {
+  & button {
+    display: flex;
+    align-items: center;
+
+    & > svg {
+      width: 2rem;
+      height: auto;
+    }
+  }
+}

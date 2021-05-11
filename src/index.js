@@ -20,8 +20,4 @@ miro.onReady(async () => {
 
   initWidgetsCreatedListener();
   initWidgetTransformatioUpdated();
-
-  miro.addListener("SELECTION_UPDATED", (widget) => {
-    console.log(widget);
-  });
 });

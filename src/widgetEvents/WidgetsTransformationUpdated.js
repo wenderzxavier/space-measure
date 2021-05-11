@@ -33,10 +33,6 @@ const widgetTransformationUpdateMetadata = async (widgets) => {
       widgetsIDs.shapes.includes(shape.id)
     );
 
-    // const shapes = await miro.board.tags.get(...widgetsIDs.shapes);
-    console.log("GET SHAPES");
-    console.log(allShapes);
-    console.log(shapesToUpdate);
     updateShapesAreaPerimeter(shapesToUpdate);
   }
 
@@ -45,10 +41,6 @@ const widgetTransformationUpdateMetadata = async (widgets) => {
     const linesToUpdate = allLines.filter((line) =>
       widgetsIDs.lines.includes(line.id)
     );
-    // const lines = await miro.board.tags.get(...widgetsIDs.lines);
-    console.log("GET LINES");
-    console.log(allLines);
-    console.log(linesToUpdate);
     updateLinesLengths(linesToUpdate);
   }
 };
