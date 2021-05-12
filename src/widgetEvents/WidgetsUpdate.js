@@ -1,10 +1,6 @@
 /* eslint-disable no-undef */
 import { APP_ID, FULL, AVAILABLE_AREA_TYPES } from "../utils/constants";
-import {
-  calculateAreaForShape,
-  calculateLength,
-  calculatePerimeterForShape,
-} from "../utils/calcs";
+import { calculateAreaForShape, calculateLength, calculatePerimeterForShape } from "../utils/calcs";
 import { isShapeAvailable } from "../utils";
 
 const updateMiroShape = (id, metadata) => {
@@ -20,39 +16,33 @@ const updateMiroShape = (id, metadata) => {
 
 export const updateShapesAreaPerimeter = (widgets) => {
   widgets.forEach((widget) => {
-    let areaType = widget.metadata[APP_ID]?.areaType || FULL;
-    let area = widget.metadata[APP_ID]?.area || 0;
-    let perimeter = widget.metadata[APP_ID]?.perimeter || 0;
     let shapeType = widget.style.shapeType || undefined;
 
-    if (!AVAILABLE_AREA_TYPES.includes(areaType)) {
-      areaType = FULL;
-    }
-
     if (isShapeAvailable(shapeType)) {
-      const calculatedArea = calculateAreaForShape(
-        shapeType,
-        widget.width,
-        widget.height,
-        areaType
-      );
+      let areaType = widget.metadata[APP_ID]?.areaType || FULL;
+      let area = widget.metadata[APP_ID]?.area || 0;
+      let perimeter = widget.metadata[APP_ID]?.perimeter || 0;
 
-      const calculatedPerimeter = calculatePerimeterForShape(
-        shapeType,
-        widget.width,
-        widget.height,
-        areaType
-      );
+      if (!AVAILABLE_AREA_TYPES.includes(areaType)) {
+        areaType = FULL;
+      }
 
-      if (
-        area !== calculatedArea ||
-        perimeter !== calculatedPerimeter ||
-        widget.metadata[APP_ID].areaType !== areaType
-      ) {
+      const calculatedArea = calculateAreaForShape(shapeType, widget.width, widget.height, areaType);
+
+      const calculatedPerimeter = calculatePerimeterForShape(shapeType, widget.width, widget.height, areaType);
+
+      if (area !== calculatedArea || perimeter !== calculatedPerimeter || widget.metadata[APP_ID].areaType !== areaType) {
         updateMiroShape(widget.id, {
           area: calculatedArea,
           perimeter: calculatedPerimeter,
           areaType,
+          shapeType,
+        });
+      }
+    } else {
+      if (!widget.metadata[APP_ID]) {
+        updateMiroShape(widget.id, {
+          count: true,
           shapeType,
         });
       }
@@ -66,12 +56,7 @@ export const updateLinesLengths = (widgets) => {
 
     const { startPosition, endPosition } = widget;
 
-    const calculatedLength = calculateLength(
-      startPosition.x,
-      startPosition.y,
-      endPosition.x,
-      endPosition.y
-    );
+    const calculatedLength = calculateLength(startPosition.x, startPosition.y, endPosition.x, endPosition.y);
 
     if (calculatedLength !== length) {
       updateMiroShape(widget.id, { length: calculatedLength });

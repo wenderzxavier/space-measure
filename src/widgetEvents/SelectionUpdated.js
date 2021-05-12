@@ -1,20 +1,29 @@
 import { APP_ID, LINE, SHAPE } from "../utils/constants";
 
-export const widgetSelected = () => {};
-
-export const infoForMenuItem = (widgets = []) => {
-  const widgetsWithMetadata = widgets.filter((widget) =>
-    widget.metadata.hasOwnProperty(APP_ID)
-  );
+const getWidgetsWithMetadata = (widgets = []) => {
+  const widgetsWithMetadata = widgets.filter((widget) => widget.metadata.hasOwnProperty(APP_ID));
 
   if (widgetsWithMetadata.length === 0) {
     return null;
   }
 
+  return widgetsWithMetadata;
+};
+
+export const infoForMenuItem = (widgets) => {
+  const widgetsWithMetadata = getWidgetsWithMetadata(widgets);
+
+  if (!widgetsWithMetadata) return null;
+
   return widgetsWithMetadata.reduce(
     (accumulated, currentWidget) => {
       if (currentWidget.type === SHAPE) {
-        const { area, perimeter } = currentWidget.metadata[APP_ID];
+        const { area, perimeter, count } = currentWidget.metadata[APP_ID];
+
+        if (count) {
+          return accumulated;
+        }
+
         return {
           ...accumulated,
           area: accumulated.area + area,

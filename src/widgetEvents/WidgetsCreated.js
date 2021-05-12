@@ -1,17 +1,6 @@
 /* eslint-disable no-undef */
-import {
-  calculateAreaForShape,
-  calculateLength,
-  calculatePerimeterForShape,
-} from "../utils/calcs";
-import {
-  APP_ID,
-  AVAILABLE_SHAPES,
-  LINE,
-  SHAPE,
-  FULL,
-  SHAPE_NAME,
-} from "../utils/constants";
+import { calculateAreaForShape, calculateLength, calculatePerimeterForShape } from "../utils/calcs";
+import { APP_ID, AVAILABLE_SHAPES, LINE, SHAPE, FULL, SHAPE_NAME } from "../utils/constants";
 import { isShapeAvailable } from "../utils";
 
 const WIDTH = 200;
@@ -20,19 +9,9 @@ const HEIGHT = 200;
 const addMetadataToShape = async (widgetId) => {
   const widget = (await miro.board.widgets.get({ id: widgetId }))[0];
   if (isShapeAvailable(widget.style.shapeType)) {
-    const area = calculateAreaForShape(
-      widget.style.shapeType,
-      widget.width,
-      widget.height,
-      FULL
-    );
+    const area = calculateAreaForShape(widget.style.shapeType, widget.width, widget.height, FULL);
 
-    const perimeter = calculatePerimeterForShape(
-      widget.style.shapeType,
-      widget.width,
-      widget.height,
-      FULL
-    );
+    const perimeter = calculatePerimeterForShape(widget.style.shapeType, widget.width, widget.height, FULL);
 
     miro.board.widgets.update({
       id: widget.id,
@@ -46,7 +25,15 @@ const addMetadataToShape = async (widgetId) => {
       },
     });
   } else {
-    miro.showErrorNotification("Shape not supported for SpaceMeasure");
+    miro.board.widgets.update({
+      id: widget.id,
+      metadata: {
+        [APP_ID]: {
+          count: true,
+          shapeType: widget.style.shapeType,
+        },
+      },
+    });
   }
 };
 
@@ -56,29 +43,19 @@ const addMetadataToLine = async (widgetId) => {
     id: widget.id,
     metadata: {
       [APP_ID]: {
-        length: calculateLength(
-          widget.startPosition.x,
-          widget.startPosition.y,
-          widget.endPosition.x,
-          widget.endPosition.y
-        ),
+        length: calculateLength(widget.startPosition.x, widget.startPosition.y, widget.endPosition.x, widget.endPosition.y),
       },
     },
   });
 };
 
-export const createShape = async (
-  areaType = FULL,
-  shape = AVAILABLE_SHAPES.RECTANGLE
-) => {
+export const createShape = async (areaType = FULL, shape = AVAILABLE_SHAPES.RECTANGLE) => {
   const boardCenter = await miro.board.viewport.get();
   const positionX = boardCenter.x + boardCenter.width / 2;
   const positionY = boardCenter.y + boardCenter.height / 2;
   miro.board.widgets.create({
     type: SHAPE,
-    text: `${areaType.charAt(0).toUpperCase() + areaType.slice(1)} ${
-      SHAPE_NAME[shape]
-    }`,
+    text: `${areaType.charAt(0).toUpperCase() + areaType.slice(1)} ${SHAPE_NAME[shape]}`,
     height: HEIGHT,
     width: WIDTH,
     metadata: {

@@ -1,36 +1,106 @@
 /* eslint-disable no-undef */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { WidgetCreationButtons } from "./apps/sidebar";
+import SelectWidgetsPanel, { updateSelectedWidgets, WidgetCreationButtons } from "./apps/sidebar";
 
 import "./styles/app.scss";
 
-// import { LINE, SHAPE } from "./utils/constants";
+const App = () => {
+  const [selectedWidgets, setSelectedWidgets] = useState({ ungrouped: [] });
 
-function App() {
-  miro.onReady(() => {
-    miro.addListener("SELECTION_UPDATED", (widget) => {
-      console.log("SELECTION_UPDATED");
-      console.log(widget);
+  useEffect(() => {
+    setSelectionListener();
+    setWidgetTransformationUpdatedListener();
+    setWidgetCreatedListener();
+  }, []);
+
+  const setSelectionListener = () => {
+    miro.addListener("SELECTION_UPDATED", (event) => {
+      console.log(event);
+      updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
+        setSelectedWidgets(() => widgetsToDisplay);
+      });
     });
-  });
+  };
 
-  // const handleClick = async () => {
-  //   let allShapes = await miro.board.widgets.get({ type: SHAPE });
-  //   console.log(allShapes);
+  const setWidgetTransformationUpdatedListener = () => {
+    miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (event) => {
+      console.log(event);
+      updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
+        setSelectedWidgets(() => widgetsToDisplay);
+      });
+    });
+  };
 
-  //   let allLines = await miro.board.widgets.get({ type: LINE });
-  //   console.log(allLines);
-  // };
+  const setWidgetCreatedListener = () => {
+    miro.addListener("WIDGETS_CREATED", (event) => {
+      console.log(event);
+      updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
+        setSelectedWidgets(() => widgetsToDisplay);
+      });
+    });
+  };
 
   return (
-    <div className="App">
-      <WidgetCreationButtons />
-    </div>
+    <>
+      <div className="App">
+        <h2>App version 1.1</h2>
+        <WidgetCreationButtons />
+        <SelectWidgetsPanel widgetsInfo={selectedWidgets} />
+      </div>
+    </>
   );
-}
+};
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// function App() {
+// let selectedWidgets = { ungrouped: [] };
+// const [selectedWidgets, setSelectedWidgets] = useState({ ungrouped: [] });
+// const [counterTest, setCounterTest] = useState(0);
+
+// const updateWidgetsToDisplay = (event) => {
+//   console.log("UpdateWidgets New Method");
+//   updateSelectedWidgets(event.data).then((selectedWidgets) => {
+//     setSelectedWidgets(() => selectedWidgets);
+//   });
+// };
+
+// miro.onReady(() => {
+// miro.addListener("SELECTION_UPDATED", () => {
+// console.log("selection updated triggered");
+// setCounterTest((counter) => counter + 1);
+// });
+// miro.addListener("SELECTION_UPDATED", updateWidgetsToDisplay);
+// miro.addListener("SELECTION_UPDATED", (event) => {
+//   console.log(event);
+//   updateSelectedWidgets(event.data);
+//   // setCounterTest((counter) => counter + 1);
+//   // console.log("Chamou SELECTION_UPDATED");
+//   // updateSelectedWidgets(event.data).then((selectedWidgets) => {
+//   //   updateWidgetsToDisplay(selectedWidgets);
+//   // });
+// });
+
+// miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (event) => {
+// console.log(event);
+// updateSelectedWidgets(event.data);
+// setCounterTest((counter) => counter + 1);
+// console.log("Chamou WIDGETS_TRANSFORMATION_UPDATED");
+// updateSelectedWidgets(event.data).then((updatedWidgets) => {
+//   updateWidgetsToDisplay(updatedWidgets);
+// });
+// });
+// });
+
+// console.log(selectedWidgets);
+
+window.miro.onReady(() => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+});
 
 // 1) Scale input: The scale on architectural drawings are used to reflect a dimension on the drawing, which corresponds to a
 // dimension in real life. And example of a scale 1/8" = 1'; this means that 1/8 inches on the drawing will correspond to 1 feet in

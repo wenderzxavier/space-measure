@@ -29,18 +29,14 @@ const widgetTransformationUpdateMetadata = async (widgets) => {
 
   if (widgetsIDs.shapes.length > 0) {
     const allShapes = await miro.board.widgets.get({ type: SHAPE });
-    const shapesToUpdate = allShapes.filter((shape) =>
-      widgetsIDs.shapes.includes(shape.id)
-    );
+    const shapesToUpdate = allShapes.filter((shape) => widgetsIDs.shapes.includes(shape.id));
 
     updateShapesAreaPerimeter(shapesToUpdate);
   }
 
   if (widgetsIDs.lines.length > 0) {
     let allLines = await miro.board.widgets.get({ type: LINE });
-    const linesToUpdate = allLines.filter((line) =>
-      widgetsIDs.lines.includes(line.id)
-    );
+    const linesToUpdate = allLines.filter((line) => widgetsIDs.lines.includes(line.id));
     updateLinesLengths(linesToUpdate);
   }
 };

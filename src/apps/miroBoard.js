@@ -24,18 +24,13 @@ export const initializeSidebarAndMenuItem = () =>
             tooltip: "Space Measure",
             svgIcon: icon24,
             onClick: () => {
-              const area =
-                infoToDisplay.area !== 0 ? `Area :${infoToDisplay.area} | ` : "";
-              const perimeter =
-                infoToDisplay.perimeter !== 0
-                  ? `Perimeter :${infoToDisplay.perimeter} | `
-                  : "";
-              const length =
-                infoToDisplay.length !== 0
-                  ? `Length :${infoToDisplay.length}`
-                  : "";
+              const area = infoToDisplay.area !== 0 ? `Area :${infoToDisplay.area} | ` : "";
+              const perimeter = infoToDisplay.perimeter !== 0 ? `Perimeter :${infoToDisplay.perimeter} | ` : "";
+              const length = infoToDisplay.length !== 0 ? `Length :${infoToDisplay.length}` : "";
 
-              miro.showErrorNotification(`${area}${perimeter}${length}`);
+              const message = `${area}${perimeter}${length}`;
+
+              miro.showErrorNotification(`${message.length === 0 ? "No information to display." : message}`);
             },
           },
         ]);
