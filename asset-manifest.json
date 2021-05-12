@@ -1,20 +1,20 @@
 {
   "files": {
     "app.css": "/space-measure/static/css/app.62bd8c51.chunk.css",
-    "app.js": "/space-measure/static/js/app.8fe3302f.chunk.js",
-    "app.js.map": "/space-measure/static/js/app.8fe3302f.chunk.js.map",
-    "index.js": "/space-measure/static/js/index.d34626e1.chunk.js",
-    "index.js.map": "/space-measure/static/js/index.d34626e1.chunk.js.map",
+    "app.js": "/space-measure/static/js/app.373fb35f.chunk.js",
+    "app.js.map": "/space-measure/static/js/app.373fb35f.chunk.js.map",
+    "index.js": "/space-measure/static/js/index.83db3a8e.chunk.js",
+    "index.js.map": "/space-measure/static/js/index.83db3a8e.chunk.js.map",
     "runtime-app.js": "/space-measure/static/js/runtime-app.5ee9d9c9.js",
     "runtime-app.js.map": "/space-measure/static/js/runtime-app.5ee9d9c9.js.map",
     "runtime-index.js": "/space-measure/static/js/runtime-index.e1c2c105.js",
     "runtime-index.js.map": "/space-measure/static/js/runtime-index.e1c2c105.js.map",
-    "static/js/4.161d4586.chunk.js": "/space-measure/static/js/4.161d4586.chunk.js",
-    "static/js/4.161d4586.chunk.js.map": "/space-measure/static/js/4.161d4586.chunk.js.map",
+    "static/js/4.0bb220e5.chunk.js": "/space-measure/static/js/4.0bb220e5.chunk.js",
+    "static/js/4.0bb220e5.chunk.js.map": "/space-measure/static/js/4.0bb220e5.chunk.js.map",
     "app.html": "/space-measure/app.html",
     "index.html": "/space-measure/index.html",
     "static/css/app.62bd8c51.chunk.css.map": "/space-measure/static/css/app.62bd8c51.chunk.css.map",
-    "static/js/4.161d4586.chunk.js.LICENSE.txt": "/space-measure/static/js/4.161d4586.chunk.js.LICENSE.txt",
+    "static/js/4.0bb220e5.chunk.js.LICENSE.txt": "/space-measure/static/js/4.0bb220e5.chunk.js.LICENSE.txt",
     "static/media/full-ellipse.c6b62d4a.svg": "/space-measure/static/media/full-ellipse.c6b62d4a.svg",
     "static/media/full-rectangle.9a38ec94.svg": "/space-measure/static/media/full-rectangle.9a38ec94.svg",
     "static/media/full-triangle.b9a6f870.svg": "/space-measure/static/media/full-triangle.b9a6f870.svg",
@@ -25,10 +25,10 @@
   },
   "entrypoints": [
     "static/js/runtime-index.e1c2c105.js",
-    "static/js/index.d34626e1.chunk.js",
+    "static/js/index.83db3a8e.chunk.js",
     "static/js/runtime-app.5ee9d9c9.js",
-    "static/js/4.161d4586.chunk.js",
+    "static/js/4.0bb220e5.chunk.js",
     "static/css/app.62bd8c51.chunk.css",
-    "static/js/app.8fe3302f.chunk.js"
+    "static/js/app.373fb35f.chunk.js"
   ]
 }
