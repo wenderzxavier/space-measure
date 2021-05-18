@@ -3,8 +3,8 @@ import { APP_ID, FULL, AVAILABLE_AREA_TYPES } from "../utils/constants";
 import { calculateAreaForShape, calculateLength, calculatePerimeterForShape } from "../utils/calcs";
 import { isShapeAvailable } from "../utils";
 
-const updateMiroShape = (id, metadata) => {
-  miro.board.widgets.update({
+export const updateMiroShape = async (id, metadata) => {
+  await miro.board.widgets.update({
     id,
     metadata: {
       [APP_ID]: {
@@ -16,6 +16,7 @@ const updateMiroShape = (id, metadata) => {
 
 export const updateShapesAreaPerimeter = (widgets) => {
   widgets.forEach((widget) => {
+    console.log(widget);
     let shapeType = widget.style.shapeType || undefined;
 
     if (isShapeAvailable(shapeType)) {
@@ -32,7 +33,10 @@ export const updateShapesAreaPerimeter = (widgets) => {
       const calculatedPerimeter = calculatePerimeterForShape(shapeType, widget.width, widget.height, areaType);
 
       if (area !== calculatedArea || perimeter !== calculatedPerimeter || widget.metadata[APP_ID].areaType !== areaType) {
+        console.log("TA ATUALIZANDO O WIDGET");
+        console.log(widget.metadata[APP_ID]);
         updateMiroShape(widget.id, {
+          test: "updateShapeArea",
           area: calculatedArea,
           perimeter: calculatedPerimeter,
           areaType,
@@ -42,6 +46,7 @@ export const updateShapesAreaPerimeter = (widgets) => {
     } else {
       if (!widget.metadata[APP_ID]) {
         updateMiroShape(widget.id, {
+          test: "updateShapeArea",
           count: true,
           shapeType,
         });

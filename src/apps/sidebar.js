@@ -9,6 +9,7 @@ import { ReactComponent as HalfTriangle } from "../assets/half-triangle.svg";
 import { ReactComponent as Parallelogram } from "../assets/parallelogram.svg";
 import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, QUARTER, SHAPE_ICONS } from "../utils/constants";
 import { createShape } from "../widgetEvents/WidgetsCreated";
+import { updateMiroShape } from "../widgetEvents/WidgetsUpdate";
 import { getIdsFromWidgetsWithMetadata } from "../utils";
 
 const formatWidgetsByGroup = async (widgetsIds) => {
@@ -92,41 +93,29 @@ export const updateSelectedWidgets = (widgets) => {
   }
 };
 
-export const WidgetMetadataDisplay = ({}) => (
-  <>
-    <label htmlFor={`metadata-${metadataKey}`}>Key:</label>
-    <input
-      name={`metadata-${metadataKey}`}
-      type="text"
-      onChange={(evt) =>
-        changeMetadata({
-          [metadataKey]: {
-            ...state.metadataKey,
-            key: evt.target.value,
-          },
-        })
-      }
-      value={metadataKey}
-    />
-    <label htmlFor={`metadata-${metadataKey}-value`}>Value:</label>
-    <input
-      name={`metadata-${metadataKey}-value`}
-      type="text"
-      onChange={(evt) =>
-        changeMetadata({
-          [metadataKey]: {
-            ...state.metadataKey,
-            value: evt.target.value,
-          },
-        })
-      }
-      value={metadataValue}
-    />
-  </>
-);
+const fomatMetadataToUpdate = (edittedEntries, newEntries) => {
+  const formatEdittedEntries = Object.values(edittedEntries).reduce((accumulated, currentValue) => {
+    return {
+      ...accumulated,
+      [currentValue.key]: currentValue.value,
+    };
+  }, {});
+
+  const formatNewEntries = newEntries.reduce((accumulated, currentValue) => {
+    return {
+      ...accumulated,
+      [currentValue.key]: currentValue.value,
+    };
+  }, {});
+
+  console.log(formatEdittedEntries);
+  console.log(formatNewEntries);
+
+  return { ...edittedEntries, ...formatNewEntries };
+};
 
 export const WidgetInformationDisplay = ({ widget }) => {
-  const { id, shapeType, area, perimeter, length, count, ...metadata } = widget;
+  const { id, shapeType, areaType, area, perimeter, length, count, ...metadata } = widget;
 
   const initMetadataObj = Object.keys(metadata).reduce(
     (accumulator, currentKey) => ({
@@ -139,7 +128,8 @@ export const WidgetInformationDisplay = ({ widget }) => {
     {}
   );
 
-  const [newMetadata, setMetadata] = useState(initMetadataObj);
+  const [edittedMetadata, setMetadata] = useState(initMetadataObj);
+  const [newMetadataEntry, updateNewMetadataEntries] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
 
   const handleKeyChange = (evt, metadataKey) => {
@@ -164,7 +154,40 @@ export const WidgetInformationDisplay = ({ widget }) => {
     }));
   };
 
-  console.log(metadata);
+  const handleNewEntryKeyChange = (evt, index) => {
+    setIsChanged(true);
+    console.log(index);
+
+    updateNewMetadataEntries((entries) => [
+      ...entries.slice(0, index),
+      {
+        ...entries[index],
+        key: evt.target.value,
+      },
+      ...entries.slice(index + 1),
+    ]);
+  };
+
+  const handleNewEntryValueChange = (evt, index) => {
+    setIsChanged(true);
+    console.log(index);
+
+    updateNewMetadataEntries((entries) => [
+      ...entries.slice(0, index),
+      {
+        ...entries[index],
+        value: evt.target.value,
+      },
+      ...entries.slice(index + 1),
+    ]);
+  };
+
+  const updateMetadata = () => {
+    const formattedMetadata = fomatMetadataToUpdate(edittedMetadata, newMetadataEntry);
+    updateMiroShape(id, { ...widget, ...formattedMetadata });
+  };
+
+  // console.log({ ...widget, ...newMetadataEntry });
 
   return (
     <div>
@@ -178,25 +201,57 @@ export const WidgetInformationDisplay = ({ widget }) => {
           <input type="checkbox" id="countShape" name="countShape" checked disabled />
         </>
       )}
-      {Object.keys(newMetadata).map((currentKey, index) => (
+      {areaType && (
+        <>
+          <label htmlFor="areaType">Key:</label>
+          <input name="areaType" type="text" value="areaType" disabled />
+          <label htmlFor="areaTypeValue">Value:</label>
+          <input name="areaTypeValue" type="text" value={areaType} disabled />
+        </>
+      )}
+      {Object.keys(edittedMetadata).map((currentKey, index) => (
         <div key={index}>
           <label htmlFor={`metadata-${currentKey}`}>Key:</label>
           <input
             name={`metadata-${currentKey}`}
             type="text"
-            value={newMetadata[currentKey].key}
+            value={edittedMetadata[currentKey].key}
             onChange={(evt) => handleKeyChange(evt, currentKey)}
           />
           <label htmlFor={`metadata-${currentKey}-value`}>Value:</label>
           <input
             name={`metadata-${currentKey}-value`}
             type="text"
-            value={newMetadata[currentKey].value}
+            value={edittedMetadata[currentKey].value}
             onChange={(evt) => handleValueChange(evt, currentKey)}
           />
         </div>
       ))}
-      <button disabled={isChanged ? false : true}>Update Metadata</button>
+      {newMetadataEntry.map((newEntry, index) => (
+        <div key={index}>
+          <label htmlFor={`metadata-entry${index}`}>Key:</label>
+          <input
+            name={`metadata-entry-${index}`}
+            placeholder="Insert metadata key here"
+            type="text"
+            value={newEntry.key}
+            onChange={(evt) => handleNewEntryKeyChange(evt, index)}
+          />
+          <label htmlFor={`metadata-entry${index}-value`}>Value:</label>
+          <input
+            name={`metadata-entry${index}-value`}
+            placeholder="Insert metadata value here"
+            type="text"
+            value={newEntry.value}
+            onChange={(evt) => handleNewEntryValueChange(evt, index)}
+          />
+          <button onClick={() => updateNewMetadataEntries((entries) => [...entries.slice(0, index), ...entries.slice(index + 1)])}>Remove</button>
+        </div>
+      ))}
+      <button onClick={() => updateNewMetadataEntries((entries) => [...entries, { key: "", value: "" }])}>+</button>
+      <button disabled={isChanged ? false : true} onClick={() => updateMetadata()}>
+        Update Metadata
+      </button>
     </div>
   );
 };
