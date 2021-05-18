@@ -31,7 +31,6 @@ const widgetTransformationUpdateMetadata = async (widgets) => {
     const allShapes = await miro.board.widgets.get({ type: SHAPE });
     const shapesToUpdate = allShapes.filter((shape) => widgetsIDs.shapes.includes(shape.id));
 
-    console.log("Widget Transformation Updated");
     updateShapesAreaPerimeter(shapesToUpdate);
   }
 

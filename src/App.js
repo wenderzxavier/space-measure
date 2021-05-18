@@ -44,10 +44,10 @@ const App = () => {
   return (
     <>
       <div className="App">
-        <h2>Space Measure 1.9</h2>
+        <h2>Space Measure</h2>
         <div className="scale-unit-selector">
-          <MetricUnitSelector />
           <MetricScaleSelector />
+          <MetricUnitSelector />
         </div>
         <WidgetCreationButtons />
         <SelectWidgetsPanel widgetsInfo={selectedWidgets} />

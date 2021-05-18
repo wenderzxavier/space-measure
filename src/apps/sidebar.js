@@ -175,10 +175,7 @@ const fomatMetadataToUpdate = (edittedEntries, newEntries) => {
     };
   }, {});
 
-  console.log(formatEdittedEntries);
-  console.log(formatNewEntries);
-
-  return { ...edittedEntries, ...formatNewEntries };
+  return { ...formatEdittedEntries, ...formatNewEntries };
 };
 
 export const WidgetInformationDisplay = ({ widget }) => {
@@ -223,7 +220,6 @@ export const WidgetInformationDisplay = ({ widget }) => {
 
   const handleNewEntryKeyChange = (evt, index) => {
     setIsChanged(true);
-    console.log(index);
 
     updateNewMetadataEntries((entries) => [
       ...entries.slice(0, index),
@@ -237,7 +233,6 @@ export const WidgetInformationDisplay = ({ widget }) => {
 
   const handleNewEntryValueChange = (evt, index) => {
     setIsChanged(true);
-    console.log(index);
 
     updateNewMetadataEntries((entries) => [
       ...entries.slice(0, index),
@@ -251,9 +246,6 @@ export const WidgetInformationDisplay = ({ widget }) => {
 
   const updateMetadata = () => {
     const formattedMetadata = fomatMetadataToUpdate(edittedMetadata, newMetadataEntry);
-    console.log(formattedMetadata);
-    console.log("Updating Miro Shape");
-    console.log({ ...widget, ...formattedMetadata });
     updateMiroShape(id, { ...widget, ...formattedMetadata });
   };
 
@@ -347,8 +339,6 @@ export const WidgetInformationDisplay = ({ widget }) => {
 
 const SelectWidgetsPanel = ({ widgetsInfo }) => {
   const groupIds = Object.keys(widgetsInfo).filter((item) => item !== "ungrouped");
-
-  console.log(widgetsInfo);
 
   return (
     <div className="selected-widgets-wrapper">

@@ -24,6 +24,17 @@ h2 {
   font-weight: 500;
 }
 
+.scale-unit-selector {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  select {
+    padding: 2px 5px;
+    margin: 10px;
+  }
+}
+
 .widget-creation {
   margin-top: 15px;
   display: flex;

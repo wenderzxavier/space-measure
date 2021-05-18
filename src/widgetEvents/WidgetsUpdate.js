@@ -14,9 +14,7 @@ export const updateMiroShape = async (id, metadata) =>
   });
 
 export const updateShapesAreaPerimeter = (widgets) => {
-  console.log("updateShapesAreaPerimeter");
   widgets.forEach((widget) => {
-    console.log(widget);
     let shapeType = widget.style.shapeType || undefined;
 
     if (isShapeAvailable(shapeType)) {
@@ -32,19 +30,29 @@ export const updateShapesAreaPerimeter = (widgets) => {
 
       const calculatedPerimeter = calculatePerimeterForShape(shapeType, widget.width, widget.height, areaType);
 
-      if (area !== calculatedArea) console.log("Area not equal");
-      if (perimeter !== calculatedPerimeter) console.log("Perimeter not equal");
-      if (widget.metadata[APP_ID].areaType !== areaType) console.log("Area Type not equal");
+      if (area !== calculatedArea) {
+        console.log("Area not equal");
+        console.log(area);
+        console.log(calculatedArea);
+      }
+
+      if (perimeter !== calculatedPerimeter) {
+        console.log("Perimeter not equal");
+        console.log(perimeter);
+        console.log(calculatedPerimeter);
+      }
+      if (widget.metadata[APP_ID].areaType !== areaType) {
+        console.log("Area Type not equal");
+        console.log(widget.metadata[APP_ID].areaType);
+        console.log(areaType);
+      }
 
       if (area !== calculatedArea || perimeter !== calculatedPerimeter || widget.metadata[APP_ID].areaType !== areaType) {
-        console.log("TA ATUALIZANDO O WIDGET");
-        console.log(widget.metadata[APP_ID]);
         updateMiroShape(widget.id, {
           area: calculatedArea,
           perimeter: calculatedPerimeter,
           areaType,
           shapeType,
-          test: "updateShapeArea",
         });
       }
     } else {
