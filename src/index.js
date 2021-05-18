@@ -12,8 +12,8 @@ miro.onReady(async () => {
   const allShapes = await miro.board.widgets.get({ type: constants.SHAPE });
   const allLines = await miro.board.widgets.get({ type: constants.LINE });
 
-  console.log(allShapes);
-  console.log(allLines);
+  // console.log(allShapes);
+  // console.log(allLines);
 
   updateShapesAreaPerimeter(allShapes);
   updateLinesLengths(allLines);

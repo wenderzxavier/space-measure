@@ -50,35 +50,35 @@ export const WidgetCreationButtons = () => (
   <div className="widget-creation">
     <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.ELLIPSE)}>
       <FullEllipse />
-      Create Full Ellipse
+      Full Ellipse
     </button>
     <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.ELLIPSE)}>
       <HalfEllipse />
-      Create Half Ellipse
+      Half Ellipse
     </button>
     <button onClick={() => createShape(QUARTER, AVAILABLE_SHAPES.ELLIPSE)}>
       <QuarterEllipse />
-      Create Quarter Ellipse
+      Quarter Ellipse
     </button>
     <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.RECTANGLE)}>
       <FullRectangle />
-      Create Full Quadrilateral
+      Full Quadrilateral
     </button>
     <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.PARALLELOGRAM)}>
       <Parallelogram />
-      Create Full Parallelogram
+      Full Parallelogram
     </button>
     <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.PARALLELOGRAM)}>
       <Parallelogram />
-      Create Half Parallelogram
+      Half Parallelogram
     </button>
     <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.TRIANGLE)}>
       <FullTriangle />
-      Create Full Triangle
+      Full Triangle
     </button>
     <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.TRIANGLE)}>
       <HalfTriangle />
-      Create Half Triangle
+      Half Triangle
     </button>
   </div>
 );
@@ -184,17 +184,30 @@ export const WidgetInformationDisplay = ({ widget }) => {
 
   const updateMetadata = () => {
     const formattedMetadata = fomatMetadataToUpdate(edittedMetadata, newMetadataEntry);
+    console.log(formattedMetadata);
+    console.log("Updating Miro Shape");
+    console.log({ ...widget, ...formattedMetadata });
     updateMiroShape(id, { ...widget, ...formattedMetadata });
   };
 
-  // console.log({ ...widget, ...newMetadataEntry });
-
   return (
-    <div>
-      <h1>Shape: {SHAPE_ICONS[shapeType]}</h1>
-      {area && <span>{`Area: ${area}`}</span>}
-      {perimeter && <span>{`Perimeter: ${perimeter}`}</span>}
-      {length && <span>{`Length: ${length}`}</span>}
+    <div className="shape-wrapper">
+      {shapeType && <span className="widget-shape">Shape: {SHAPE_ICONS[shapeType]}</span>}
+      {area && (
+        <div className="shape-label">
+          Area: <span className="shape-value">{area}</span>
+        </div>
+      )}
+      {perimeter && (
+        <div className="shape-label">
+          Perimeter: <span className="shape-value">{perimeter}</span>
+        </div>
+      )}
+      {length && (
+        <div className="shape-label">
+          Length: <span className="shape-value">{length}</span>
+        </div>
+      )}
       {count && (
         <>
           <label for="countShape">Counting Shape:</label>
@@ -202,56 +215,65 @@ export const WidgetInformationDisplay = ({ widget }) => {
         </>
       )}
       {areaType && (
-        <>
-          <label htmlFor="areaType">Key:</label>
-          <input name="areaType" type="text" value="areaType" disabled />
-          <label htmlFor="areaTypeValue">Value:</label>
-          <input name="areaTypeValue" type="text" value={areaType} disabled />
-        </>
+        <div className="metadata-keyvalue">
+          <div className="metadata-label-input">
+            <label htmlFor="areaType">Key:</label>
+            <input name="areaType" type="text" value="areaType" disabled />
+          </div>
+          <div className="metadata-label-input">
+            <label htmlFor="areaTypeValue">Value:</label>
+            <input name="areaTypeValue" type="text" value={areaType} disabled />
+          </div>
+        </div>
       )}
       {Object.keys(edittedMetadata).map((currentKey, index) => (
-        <div key={index}>
-          <label htmlFor={`metadata-${currentKey}`}>Key:</label>
-          <input
-            name={`metadata-${currentKey}`}
-            type="text"
-            value={edittedMetadata[currentKey].key}
-            onChange={(evt) => handleKeyChange(evt, currentKey)}
-          />
-          <label htmlFor={`metadata-${currentKey}-value`}>Value:</label>
-          <input
-            name={`metadata-${currentKey}-value`}
-            type="text"
-            value={edittedMetadata[currentKey].value}
-            onChange={(evt) => handleValueChange(evt, currentKey)}
-          />
+        <div className="metadata-keyvalue" key={index}>
+          <div className="metadata-label-input">
+            <label htmlFor={`metadata-${currentKey}`}>Key:</label>
+            <input
+              name={`metadata-${currentKey}`}
+              type="text"
+              value={edittedMetadata[currentKey].key}
+              onChange={(evt) => handleKeyChange(evt, currentKey)}
+            />
+          </div>
+          <div className="metadata-label-input">
+            <label htmlFor={`metadata-${currentKey}-value`}>Value:</label>
+            <input
+              name={`metadata-${currentKey}-value`}
+              type="text"
+              value={edittedMetadata[currentKey].value}
+              onChange={(evt) => handleValueChange(evt, currentKey)}
+            />
+          </div>
         </div>
       ))}
       {newMetadataEntry.map((newEntry, index) => (
-        <div key={index}>
-          <label htmlFor={`metadata-entry${index}`}>Key:</label>
-          <input
-            name={`metadata-entry-${index}`}
-            placeholder="Insert metadata key here"
-            type="text"
-            value={newEntry.key}
-            onChange={(evt) => handleNewEntryKeyChange(evt, index)}
-          />
-          <label htmlFor={`metadata-entry${index}-value`}>Value:</label>
-          <input
-            name={`metadata-entry${index}-value`}
-            placeholder="Insert metadata value here"
-            type="text"
-            value={newEntry.value}
-            onChange={(evt) => handleNewEntryValueChange(evt, index)}
-          />
+        <div className="metadata-keyvalue" key={index}>
+          <div className="metadata-label-input">
+            <label htmlFor={`metadata-entry${index}`}>Key:</label>
+            <input name={`metadata-entry-${index}`} type="text" value={newEntry.key} onChange={(evt) => handleNewEntryKeyChange(evt, index)} />
+          </div>
+          <div className="metadata-label-input">
+            <label htmlFor={`metadata-entry${index}-value`}>Value:</label>
+            <input
+              name={`metadata-entry${index}-value`}
+              type="text"
+              value={newEntry.value}
+              onChange={(evt) => handleNewEntryValueChange(evt, index)}
+            />
+          </div>
           <button onClick={() => updateNewMetadataEntries((entries) => [...entries.slice(0, index), ...entries.slice(index + 1)])}>Remove</button>
         </div>
       ))}
-      <button onClick={() => updateNewMetadataEntries((entries) => [...entries, { key: "", value: "" }])}>+</button>
-      <button disabled={isChanged ? false : true} onClick={() => updateMetadata()}>
-        Update Metadata
-      </button>
+      <div className="new-entry-btn">
+        <button onClick={() => updateNewMetadataEntries((entries) => [...entries, { key: "", value: "" }])}>+</button>
+      </div>
+      <div className="update-metadata-btn">
+        <button disabled={isChanged ? false : true} onClick={() => updateMetadata()}>
+          Update Metadata
+        </button>
+      </div>
     </div>
   );
 };
@@ -262,24 +284,34 @@ const SelectWidgetsPanel = ({ widgetsInfo }) => {
   console.log(widgetsInfo);
 
   return (
-    <div>
-      <div style={{ "max-height": "500px", overflow: "scroll" }}>
-        <span>Grouped</span>
-        {groupIds.map((groupId, index) => (
-          <div key={index}>
-            <h1>{`Group: ${groupId}`}</h1>
-            {widgetsInfo[groupId].area && <span>{`Area: ${widgetsInfo[groupId].area}`}</span>}
-            {widgetsInfo[groupId].perimeter && <span>{`Perimeter: ${widgetsInfo[groupId].perimeter}`}</span>}
-            {widgetsInfo[groupId].length && <span>{`Length: ${widgetsInfo[groupId].length}`}</span>}
-            <div>Widgets:</div>
-            {widgetsInfo[groupId].widgets.map((widget, widgetKey) => (
-              <WidgetInformationDisplay key={widgetKey} widget={widget} />
-            ))}
-          </div>
-        ))}
-      </div>
-      <div>
-        <span>Ungrouped</span>
+    <div className="selected-widgets-wrapper">
+      {groupIds.map((groupId, index) => (
+        // <div className="widget-info-group">
+        <div className="group-wrapper" key={index}>
+          <h5>{`Group: ${groupId}`}</h5>
+          {!Number.isNaN(widgetsInfo[groupId].area) && (
+            <div className="metadata-value">
+              Area:<span>{widgetsInfo[groupId].area}</span>
+            </div>
+          )}
+          {!Number.isNaN(widgetsInfo[groupId].perimeter) && (
+            <div className="metadata-value">
+              Perimeter: <span>{widgetsInfo[groupId].perimeter}</span>
+            </div>
+          )}
+          {!Number.isNaN(widgetsInfo[groupId].length) && (
+            <div className="metadata-value">
+              Length: <span>{widgetsInfo[groupId].length}</span>
+            </div>
+          )}
+          <hr className="section-divider" />
+          {widgetsInfo[groupId].widgets.map((widget, widgetKey) => (
+            <WidgetInformationDisplay key={widgetKey} widget={widget} />
+          ))}
+        </div>
+        // </div>
+      ))}
+      <div className="group-wrapper">
         {widgetsInfo["ungrouped"].map((widget, index) => (
           <WidgetInformationDisplay key={index} widget={widget} />
         ))}

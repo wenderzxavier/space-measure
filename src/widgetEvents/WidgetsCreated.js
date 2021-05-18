@@ -7,6 +7,7 @@ const WIDTH = 200;
 const HEIGHT = 200;
 
 const addMetadataToShape = async (widgetId) => {
+  console.log("addMetadataToShape");
   const widget = (await miro.board.widgets.get({ id: widgetId }))[0];
   if (isShapeAvailable(widget.style.shapeType)) {
     const area = calculateAreaForShape(widget.style.shapeType, widget.width, widget.height, FULL);
@@ -21,6 +22,7 @@ const addMetadataToShape = async (widgetId) => {
           perimeter,
           areaType: FULL,
           shapeType: widget.style.shapeType,
+          test: "addMetadataToShape"
         },
       },
     });
@@ -50,6 +52,7 @@ const addMetadataToLine = async (widgetId) => {
 };
 
 export const createShape = async (areaType = FULL, shape = AVAILABLE_SHAPES.RECTANGLE) => {
+  console.log("createShape");
   const boardCenter = await miro.board.viewport.get();
   const positionX = boardCenter.x + boardCenter.width / 2;
   const positionY = boardCenter.y + boardCenter.height / 2;
@@ -64,6 +67,7 @@ export const createShape = async (areaType = FULL, shape = AVAILABLE_SHAPES.RECT
         perimeter: calculatePerimeterForShape(shape, WIDTH, HEIGHT, areaType),
         areaType: areaType,
         shapeType: shape,
+        test: "createShape"
       },
     },
     style: {

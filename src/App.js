@@ -44,7 +44,7 @@ const App = () => {
   return (
     <>
       <div className="App">
-        <h2>App version 1.21</h2>
+        <h2>Space Measure 1.4</h2>
         <WidgetCreationButtons />
         <SelectWidgetsPanel widgetsInfo={selectedWidgets} />
       </div>
