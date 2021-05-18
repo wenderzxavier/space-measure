@@ -7,10 +7,31 @@ import { ReactComponent as FullTriangle } from "../assets/full-triangle.svg";
 import { ReactComponent as FullRectangle } from "../assets/full-rectangle.svg";
 import { ReactComponent as HalfTriangle } from "../assets/half-triangle.svg";
 import { ReactComponent as Parallelogram } from "../assets/parallelogram.svg";
-import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, QUARTER, SHAPE_ICONS } from "../utils/constants";
+import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, QUARTER, SCALE_UNITS, SHAPE_ICONS } from "../utils/constants";
 import { createShape } from "../widgetEvents/WidgetsCreated";
 import { updateMiroShape } from "../widgetEvents/WidgetsUpdate";
 import { getIdsFromWidgetsWithMetadata } from "../utils";
+import { getScaleUnit, setUnit } from "../utils/scale";
+
+export const MetricUnitSelector = () => {
+  const initialScaleUnit = getScaleUnit();
+  const [selectedUnit, setSelectedUnit] = useState(initialScaleUnit || "m/m²");
+
+  const handleChange = (evt) => {
+    setSelectedUnit(() => evt.target.value);
+    setUnit(evt.target.value);
+  };
+
+  return (
+    <select value={selectedUnit} onChange={(evt) => handleChange(evt)}>
+      {SCALE_UNITS.map((unit, index) => (
+        <option key={index} value={unit}>
+          {unit}
+        </option>
+      ))}
+    </select>
+  );
+};
 
 const formatWidgetsByGroup = async (widgetsIds) => {
   const widgets = await Promise.all(

@@ -24,12 +24,17 @@ export const SCALES = {
   civil: ['1":1"', '1"=10\'0"', '1"=20\'0"', '1"=30\'0"', '1"=40\'0"', '1"=50\'0"', '1"=60\'0"', '1"=70\'0"', '1"=80\'0"', '1"=90\'0"', '1"=100\'0"'],
 };
 
-export const SCALE_UNITS = {
-  "Kilometers (Metric System)": "km",
-  "Meters (Metric System)": "m",
-  "Centimeters (Metric System)": "cm",
-  "Milimeterrs (Metric System)": "mm",
-  "Feet (Imperial System)": "ft",
+export const SCALE_UNITS = ["m/m²", "ft/ft²"];
+
+export const SCALE_UNITS_FORMATTER = {
+  "m/m²": {
+    linear: "m",
+    square: "m²",
+  },
+  "ft/ft²": {
+    linearr: "ft",
+    square: "ft²",
+  },
 };
 
 export const SHAPE_ICONS = {
