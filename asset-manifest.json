@@ -2,9 +2,9 @@
   "files": {
     "static/js/0.695ea324.chunk.js": "/space-measure/static/js/0.695ea324.chunk.js",
     "static/js/0.695ea324.chunk.js.map": "/space-measure/static/js/0.695ea324.chunk.js.map",
-    "app.css": "/space-measure/static/css/app.1923f42d.chunk.css",
-    "app.js": "/space-measure/static/js/app.9778cb63.chunk.js",
-    "app.js.map": "/space-measure/static/js/app.9778cb63.chunk.js.map",
+    "app.css": "/space-measure/static/css/app.1fc25d58.chunk.css",
+    "app.js": "/space-measure/static/js/app.ae2719eb.chunk.js",
+    "app.js.map": "/space-measure/static/js/app.ae2719eb.chunk.js.map",
     "index.js": "/space-measure/static/js/index.a9587d45.chunk.js",
     "index.js.map": "/space-measure/static/js/index.a9587d45.chunk.js.map",
     "runtime-app.js": "/space-measure/static/js/runtime-app.e1c2c105.js",
@@ -15,15 +15,15 @@
     "static/js/5.d49a2492.chunk.js.map": "/space-measure/static/js/5.d49a2492.chunk.js.map",
     "app.html": "/space-measure/app.html",
     "index.html": "/space-measure/index.html",
-    "static/css/app.1923f42d.chunk.css.map": "/space-measure/static/css/app.1923f42d.chunk.css.map",
+    "static/css/app.1fc25d58.chunk.css.map": "/space-measure/static/css/app.1fc25d58.chunk.css.map",
     "static/js/0.695ea324.chunk.js.LICENSE.txt": "/space-measure/static/js/0.695ea324.chunk.js.LICENSE.txt",
     "static/js/5.d49a2492.chunk.js.LICENSE.txt": "/space-measure/static/js/5.d49a2492.chunk.js.LICENSE.txt",
     "static/media/full-ellipse.c6b62d4a.svg": "/space-measure/static/media/full-ellipse.c6b62d4a.svg",
     "static/media/full-rectangle.9a38ec94.svg": "/space-measure/static/media/full-rectangle.9a38ec94.svg",
     "static/media/full-triangle.b9a6f870.svg": "/space-measure/static/media/full-triangle.b9a6f870.svg",
     "static/media/half-ellipse.c50d725a.svg": "/space-measure/static/media/half-ellipse.c50d725a.svg",
-    "static/media/half-triangle.3d00ecf0.svg": "/space-measure/static/media/half-triangle.3d00ecf0.svg",
-    "static/media/parallelogram.6db0dbeb.svg": "/space-measure/static/media/parallelogram.6db0dbeb.svg",
+    "static/media/half-triangle.e948155e.svg": "/space-measure/static/media/half-triangle.e948155e.svg",
+    "static/media/parallelogram.5e288add.svg": "/space-measure/static/media/parallelogram.5e288add.svg",
     "static/media/quarter-ellipse.9b94a78b.svg": "/space-measure/static/media/quarter-ellipse.9b94a78b.svg"
   },
   "entrypoints": [
@@ -33,7 +33,7 @@
     "static/js/runtime-app.e1c2c105.js",
     "static/js/0.695ea324.chunk.js",
     "static/js/5.d49a2492.chunk.js",
-    "static/css/app.1923f42d.chunk.css",
-    "static/js/app.9778cb63.chunk.js"
+    "static/css/app.1fc25d58.chunk.css",
+    "static/js/app.ae2719eb.chunk.js"
   ]
 }
