@@ -7,11 +7,24 @@ import { ReactComponent as FullTriangle } from "../assets/full-triangle.svg";
 import { ReactComponent as FullRectangle } from "../assets/full-rectangle.svg";
 import { ReactComponent as HalfTriangle } from "../assets/half-triangle.svg";
 import { ReactComponent as Parallelogram } from "../assets/parallelogram.svg";
-import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, LINEAR, QUARTER, SCALE_UNITS, SHAPE_ICONS, SQUARE } from "../utils/constants";
+import {
+  APP_ID,
+  AVAILABLE_SHAPES,
+  FULL,
+  HALF,
+  LINEAR,
+  QUARTER,
+  SCALES_ARCHITECTURAL,
+  SCALES_METRIC,
+  SCALES_CIVIL,
+  SCALE_UNITS,
+  SHAPE_ICONS,
+  SQUARE,
+} from "../utils/constants";
 import { createShape } from "../widgetEvents/WidgetsCreated";
 import { updateMiroShape } from "../widgetEvents/WidgetsUpdate";
 import { getIdsFromWidgetsWithMetadata } from "../utils";
-import { formatValue, getScaleUnit, setUnit } from "../utils/scale";
+import { formatValue, getCurrentScale, getScaleUnit, setScale, setUnit } from "../utils/scale";
 
 export const MetricUnitSelector = () => {
   const initialScaleUnit = getScaleUnit();
@@ -23,8 +36,41 @@ export const MetricUnitSelector = () => {
   };
 
   return (
-    <select value={selectedUnit} onChange={(evt) => handleChange(evt)}>
+    <select value={selectedUnit} onChange={(evt) => handleChange(evt)} className="unit-selector">
       {SCALE_UNITS.map((unit, index) => (
+        <option key={index} value={unit}>
+          {unit}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+export const MetricScaleSelector = () => {
+  const initialScale = getCurrentScale();
+  const [selectedScale, setSelectedScale] = useState(initialScale || "1:1");
+
+  const handleChange = (evt) => {
+    setSelectedScale(() => evt.target.value);
+    setScale(evt.target.value);
+  };
+
+  return (
+    <select value={selectedScale} onChange={(evt) => handleChange(evt)} className="scale-selector">
+      <option disabled>Metric</option>
+      {SCALES_METRIC.map((unit, index) => (
+        <option key={index} value={unit}>
+          {unit}
+        </option>
+      ))}
+      <option disabled>Architectural</option>
+      {SCALES_ARCHITECTURAL.map((unit, index) => (
+        <option key={index} value={unit}>
+          {unit}
+        </option>
+      ))}
+      <option disabled>Civil</option>
+      {SCALES_CIVIL.map((unit, index) => (
         <option key={index} value={unit}>
           {unit}
         </option>

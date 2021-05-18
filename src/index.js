@@ -2,7 +2,7 @@
 // import { updateShapeMetadata } from "./calcs";
 import { initializeSidebarAndMenuItem } from "./apps/miroBoard";
 import * as constants from "./utils/constants";
-import { setUnit } from "./utils/scale";
+import { setScale, setUnit } from "./utils/scale";
 import { initWidgetsCreatedListener } from "./widgetEvents/WidgetsCreated";
 import { initWidgetTransformatioUpdated } from "./widgetEvents/WidgetsTransformationUpdated";
 import { updateLinesLengths, updateShapesAreaPerimeter } from "./widgetEvents/WidgetsUpdate";
@@ -11,6 +11,7 @@ miro.onReady(async () => {
   initializeSidebarAndMenuItem();
 
   setUnit(constants.SCALE_UNITS[0]);
+  setScale("1:1");
 
   const allShapes = await miro.board.widgets.get({ type: constants.SHAPE });
   const allLines = await miro.board.widgets.get({ type: constants.LINE });

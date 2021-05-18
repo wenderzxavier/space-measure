@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import SelectWidgetsPanel, { MetricUnitSelector, updateSelectedWidgets, WidgetCreationButtons } from "./apps/sidebar";
+import SelectWidgetsPanel, { MetricScaleSelector, MetricUnitSelector, updateSelectedWidgets, WidgetCreationButtons } from "./apps/sidebar";
 
 import "./styles/app.scss";
 
@@ -45,7 +45,10 @@ const App = () => {
     <>
       <div className="App">
         <h2>Space Measure 1.9</h2>
-        <MetricUnitSelector />
+        <div className="scale-unit-selector">
+          <MetricUnitSelector />
+          <MetricScaleSelector />
+        </div>
         <WidgetCreationButtons />
         <SelectWidgetsPanel widgetsInfo={selectedWidgets} />
       </div>
