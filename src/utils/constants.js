@@ -2,6 +2,8 @@ export const SHAPE = "SHAPE";
 export const LINE = "LINE";
 export const FULL = "full";
 export const QUARTER = "quarter";
+export const LINEAR = "linear";
+export const SQUARE = "square";
 export const HALF = "half";
 export const APP_ID = "3074457358398558776";
 export const AVAILABLE_AREA_TYPES = [FULL, HALF, QUARTER];
@@ -32,7 +34,7 @@ export const SCALE_UNITS_FORMATTER = {
     square: "m²",
   },
   "ft/ft²": {
-    linearr: "ft",
+    linear: "ft",
     square: "ft²",
   },
 };

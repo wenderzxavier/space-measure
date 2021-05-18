@@ -7,11 +7,11 @@ import { ReactComponent as FullTriangle } from "../assets/full-triangle.svg";
 import { ReactComponent as FullRectangle } from "../assets/full-rectangle.svg";
 import { ReactComponent as HalfTriangle } from "../assets/half-triangle.svg";
 import { ReactComponent as Parallelogram } from "../assets/parallelogram.svg";
-import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, QUARTER, SCALE_UNITS, SHAPE_ICONS } from "../utils/constants";
+import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, LINEAR, QUARTER, SCALE_UNITS, SHAPE_ICONS, SQUARE } from "../utils/constants";
 import { createShape } from "../widgetEvents/WidgetsCreated";
 import { updateMiroShape } from "../widgetEvents/WidgetsUpdate";
 import { getIdsFromWidgetsWithMetadata } from "../utils";
-import { getScaleUnit, setUnit } from "../utils/scale";
+import { formatValue, getScaleUnit, setUnit } from "../utils/scale";
 
 export const MetricUnitSelector = () => {
   const initialScaleUnit = getScaleUnit();
@@ -216,17 +216,17 @@ export const WidgetInformationDisplay = ({ widget }) => {
       {shapeType && <span className="widget-shape">Shape: {SHAPE_ICONS[shapeType]}</span>}
       {area && (
         <div className="shape-label">
-          Area: <span className="shape-value">{area}</span>
+          Area: <span className="shape-value">{formatValue(area, SQUARE)}</span>
         </div>
       )}
       {perimeter && (
         <div className="shape-label">
-          Perimeter: <span className="shape-value">{perimeter}</span>
+          Perimeter: <span className="shape-value">{formatValue(perimeter, LINEAR)}</span>
         </div>
       )}
       {length && (
         <div className="shape-label">
-          Length: <span className="shape-value">{length}</span>
+          Length: <span className="shape-value">{formatValue(length, LINEAR)}</span>
         </div>
       )}
       {count && (
@@ -312,17 +312,17 @@ const SelectWidgetsPanel = ({ widgetsInfo }) => {
           <h5>{`Group: ${groupId}`}</h5>
           {!Number.isNaN(widgetsInfo[groupId].area) && (
             <div className="metadata-value">
-              Area:<span>{widgetsInfo[groupId].area}</span>
+              Area:<span>{formatValue(widgetsInfo[groupId].area, SQUARE)}</span>
             </div>
           )}
           {!Number.isNaN(widgetsInfo[groupId].perimeter) && (
             <div className="metadata-value">
-              Perimeter: <span>{widgetsInfo[groupId].perimeter}</span>
+              Perimeter: <span>{formatValue(widgetsInfo[groupId].perimeter, LINEAR)}</span>
             </div>
           )}
           {!Number.isNaN(widgetsInfo[groupId].length) && (
             <div className="metadata-value">
-              Length: <span>{widgetsInfo[groupId].length}</span>
+              Length: <span>{formatValue(widgetsInfo[groupId].length, LINEAR)}</span>
             </div>
           )}
           <hr className="section-divider" />
