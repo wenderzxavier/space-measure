@@ -74,6 +74,9 @@ export const updateLinesLengths = (widgets) => {
 
     const calculatedLength = calculateLength(startPosition.x, startPosition.y, endPosition.x, endPosition.y);
 
+    console.log("Calculated Length");
+    console.log(calculatedLength);
+
     if (calculatedLength !== length) {
       updateMiroShape(widget.id, { length: calculatedLength });
     }

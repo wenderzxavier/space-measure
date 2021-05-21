@@ -3,6 +3,7 @@ import { LINE, SHAPE } from "../utils/constants";
 import { updateLinesLengths, updateShapesAreaPerimeter } from "./WidgetsUpdate";
 
 const widgetTransformationUpdateMetadata = async (widgets) => {
+  console.log(widgets);
   const widgetsIDs = widgets.reduce(
     (ids, currentWidget) => {
       if (currentWidget.type === SHAPE) {
@@ -37,6 +38,7 @@ const widgetTransformationUpdateMetadata = async (widgets) => {
   if (widgetsIDs.lines.length > 0) {
     let allLines = await miro.board.widgets.get({ type: LINE });
     const linesToUpdate = allLines.filter((line) => widgetsIDs.lines.includes(line.id));
+    console.log(linesToUpdate);
     updateLinesLengths(linesToUpdate);
   }
 };
