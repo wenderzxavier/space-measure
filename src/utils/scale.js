@@ -1,4 +1,4 @@
-import { APP_ID, LINEAR, SCALE_FORMATTER, SCALE_UNITS_FORMATTER } from "./constants";
+import { APP_ID, LINEAR, PIXEL_FORMATTER, SCALE_UNITS_FORMATTER } from "./constants";
 
 export const getCurrentScale = () => localStorage.getItem(`${APP_ID}_scale`);
 
@@ -16,7 +16,7 @@ export const formatValue = (value, scalar = LINEAR) => {
   const currentUnit = getScaleUnit();
   const currentScale = getCurrentScale();
 
-  const scaledValue = value / SCALE_FORMATTER[currentScale];
+  const scaledValue = value / PIXEL_FORMATTER[currentScale];
 
   return `${numberWithCommas(scaledValue.toFixed(2))} ${SCALE_UNITS_FORMATTER[currentUnit][scalar]}`;
 };

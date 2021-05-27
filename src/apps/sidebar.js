@@ -14,9 +14,7 @@ import {
   HALF,
   LINEAR,
   QUARTER,
-  SCALES_ARCHITECTURAL,
-  SCALES_METRIC,
-  SCALES_CIVIL,
+  PIXEL_CONVERSION,
   SCALE_UNITS,
   SHAPE_ICONS,
   SQUARE,
@@ -48,7 +46,7 @@ export const MetricUnitSelector = () => {
 
 export const MetricScaleSelector = () => {
   const initialScale = getCurrentScale();
-  const [selectedScale, setSelectedScale] = useState(initialScale || "1:1");
+  const [selectedScale, setSelectedScale] = useState(initialScale || "1px -> 1px");
 
   const handleChange = (evt) => {
     setSelectedScale(() => evt.target.value);
@@ -57,20 +55,8 @@ export const MetricScaleSelector = () => {
 
   return (
     <select value={selectedScale} onChange={(evt) => handleChange(evt)} className="scale-selector">
-      <option disabled>Metric</option>
-      {SCALES_METRIC.map((unit, index) => (
-        <option key={index} value={unit}>
-          {unit}
-        </option>
-      ))}
-      <option disabled>Architectural</option>
-      {SCALES_ARCHITECTURAL.map((unit, index) => (
-        <option key={index} value={unit}>
-          {unit}
-        </option>
-      ))}
-      <option disabled>Civil</option>
-      {SCALES_CIVIL.map((unit, index) => (
+      <option disabled>Pixel Conversion</option>
+      {PIXEL_CONVERSION.map((unit, index) => (
         <option key={index} value={unit}>
           {unit}
         </option>
