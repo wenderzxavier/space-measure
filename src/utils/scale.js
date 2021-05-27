@@ -12,11 +12,15 @@ const numberWithCommas = (value) => {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-export const formatValue = (value, scalar = LINEAR) => {
+export const formatValue = (value = 0, scalar = LINEAR) => {
   const currentUnit = getScaleUnit();
   const currentScale = getCurrentScale();
 
   const scaledValue = value / PIXEL_FORMATTER[currentScale];
 
-  return `${numberWithCommas(scaledValue.toFixed(2))} ${SCALE_UNITS_FORMATTER[currentUnit][scalar]}`;
+  if (scaledValue > 0) {
+    return `${numberWithCommas(scaledValue.toFixed(2))} ${SCALE_UNITS_FORMATTER[currentUnit][scalar]}`;
+  }
+
+  return "-";
 };

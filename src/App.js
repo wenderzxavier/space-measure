@@ -50,7 +50,7 @@ const App = () => {
           <MetricScaleSelector />
           <MetricUnitSelector />
         </div>
-        <div>
+        <div className="file-export">
           <ExcelExporter />
         </div>
         <WidgetCreationButtons />

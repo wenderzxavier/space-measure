@@ -20,6 +20,23 @@ export const SHAPE_NAME = {
   4: "Ellipse",
   5: "Triangle",
   10: "Parallelogram",
+  13: "Arrow Left",
+  21: "Arrow Left Right",
+  12: "Arrow Right",
+  26: "Barrel",
+  23: "Brace Left",
+  24: "Brace Right",
+  6: "Bubble",
+  22: "Cloud",
+  25: "Cross",
+  17: "Hexagon",
+  18: "Octagon",
+  16: "Pentagon",
+  20: "Predefined Process",
+  8: "Rhombus",
+  7: "Rounder",
+  11: "Star",
+  19: "Trapeze",
 };
 
 export const PIXEL_CONVERSION = [
@@ -39,19 +56,21 @@ export const PIXEL_CONVERSION = [
 ];
 
 export const PIXEL_FORMATTER = {
-  "1px -> 1000000px": 1000000,
-  "1px -> 100000px": 100000,
-  "1px -> 10000px": 10000,
-  "1px -> 1000px": 1000,
-  "1px -> 100px": 100,
-  "1px -> 10px": 10,
+  "1px -> 1000000px": 0.000001,
+  "1px -> 100000px": 0.00001,
+  "1px -> 10000px": 0.0001,
+  "1px -> 1000px": 0.001,
+  "1px -> 100px": 0.01,
+  "1px -> 10px": 0.1,
   "1px -> 1px": 1,
-  "1px -> 0.1px": 0.1,
-  "1px -> 0.01px": 0.01,
-  "1px -> 0.001px": 0.001,
-  "1px -> 0.0001px": 0.0001,
-  "1px -> 0.00001px": 0.00001,
-  "1px -> 0.000001px": 0.000001,
+  "1px -> 0.1px": 10,
+  "1px -> 0.01px": 100,
+  "1px -> 0.001px": 1000,
+  "1px -> 0.0001px": 10000,
+  "1px -> 0.00001px": 100000,
+  "1px -> 0.000001px": 1000000,
+  "1px -> 0.0000001px": 10000000,
+  "1px -> 0.00000001px": 100000000,
 };
 
 export const SCALE_UNITS = ["m/m²", "ft/ft²"];
@@ -185,8 +204,6 @@ export const SHAPE_ICONS = {
       ></path>
     </svg>
   ),
-  // Pill
-  15: "",
   // Predefined Process
   20: (
     <svg viewBox="0 0 24 24" id="newlayout__predefined-process" xmlns="http://www.w3.org/2000/svg">
@@ -229,8 +246,6 @@ export const SHAPE_ICONS = {
       ></path>
     </svg>
   ),
-  // Text Rect
-  14: "",
   // Trapeze
   19: (
     <svg viewBox="0 0 24 24" id="newlayout__shape-trapeze" xmlns="http://www.w3.org/2000/svg">
