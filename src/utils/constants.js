@@ -1,5 +1,6 @@
 export const SHAPE = "SHAPE";
 export const LINE = "LINE";
+export const FRAME = "FRAME";
 export const FULL = "full";
 export const QUARTER = "quarter";
 export const LINEAR = "linear";

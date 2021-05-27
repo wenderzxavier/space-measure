@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import SelectWidgetsPanel, { MetricScaleSelector, MetricUnitSelector, updateSelectedWidgets, WidgetCreationButtons } from "./apps/sidebar";
+import ExcelExporter from "./components/ExcelExporter";
 
 import "./styles/app.scss";
 
@@ -48,6 +49,9 @@ const App = () => {
         <div className="scale-unit-selector">
           <MetricScaleSelector />
           <MetricUnitSelector />
+        </div>
+        <div>
+          <ExcelExporter />
         </div>
         <WidgetCreationButtons />
         <SelectWidgetsPanel widgetsInfo={selectedWidgets} />
