@@ -18,7 +18,7 @@ export const infoForMenuItem = (widgets) => {
   return widgetsWithMetadata.reduce(
     (accumulated, currentWidget) => {
       if (currentWidget.type === SHAPE) {
-        const { area, perimeter, count } = currentWidget.metadata[APP_ID];
+        const { width, height, areaType, shapeType, count } = currentWidget.metadata[APP_ID];
 
         if (count) {
           return accumulated;
@@ -26,8 +26,9 @@ export const infoForMenuItem = (widgets) => {
 
         return {
           ...accumulated,
-          area: accumulated.area + area,
-          perimeter: accumulated.perimeter + perimeter,
+          // Calcular Area e Perimetro aqui
+          // area: accumulated.area + area,
+          // perimeter: accumulated.perimeter + perimeter,
         };
       }
 

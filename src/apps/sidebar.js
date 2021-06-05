@@ -7,22 +7,11 @@ import { ReactComponent as FullTriangle } from "../assets/full-triangle.svg";
 import { ReactComponent as FullRectangle } from "../assets/full-rectangle.svg";
 import { ReactComponent as HalfTriangle } from "../assets/half-triangle.svg";
 import { ReactComponent as Parallelogram } from "../assets/parallelogram.svg";
-import {
-  APP_ID,
-  AVAILABLE_SHAPES,
-  FULL,
-  HALF,
-  LINEAR,
-  QUARTER,
-  PIXEL_CONVERSION,
-  SCALE_UNITS,
-  SHAPE_ICONS,
-  SQUARE,
-} from "../utils/constants";
+import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, LINEAR, QUARTER, PIXEL_CONVERSION, SCALE_UNITS, SHAPE_ICONS, SQUARE } from "../utils/constants";
 import { createShape } from "../widgetEvents/WidgetsCreated";
-import { updateMiroShape } from "../widgetEvents/WidgetsUpdate";
 import { getIdsFromWidgetsWithMetadata } from "../utils";
 import { formatValue, getCurrentScale, getScaleUnit, setScale, setUnit } from "../utils/scale";
+import { getMiroWidgets, updateMiroWidget } from "../utils/miro.functions";
 
 export const MetricUnitSelector = () => {
   const initialScaleUnit = getScaleUnit();
@@ -68,7 +57,7 @@ export const MetricScaleSelector = () => {
 const formatWidgetsByGroup = async (widgetsIds) => {
   const widgets = await Promise.all(
     widgetsIds.map(async (widgetId) => {
-      return (await miro.board.widgets.get({ id: widgetId }))[0];
+      return getMiroWidgets({ id: widgetId })[0];
     })
   );
 
@@ -232,7 +221,7 @@ export const WidgetInformationDisplay = ({ widget }) => {
 
   const updateMetadata = () => {
     const formattedMetadata = fomatMetadataToUpdate(edittedMetadata, newMetadataEntry);
-    updateMiroShape(id, { ...widget, ...formattedMetadata });
+    updateMiroWidget(id, { ...widget, ...formattedMetadata });
   };
 
   return (
@@ -275,21 +264,11 @@ export const WidgetInformationDisplay = ({ widget }) => {
         <div className="metadata-keyvalue" key={index}>
           <div className="metadata-label-input">
             <label htmlFor={`metadata-${currentKey}`}>Key:</label>
-            <input
-              name={`metadata-${currentKey}`}
-              type="text"
-              value={edittedMetadata[currentKey].key}
-              onChange={(evt) => handleKeyChange(evt, currentKey)}
-            />
+            <input name={`metadata-${currentKey}`} type="text" value={edittedMetadata[currentKey].key} onChange={(evt) => handleKeyChange(evt, currentKey)} />
           </div>
           <div className="metadata-label-input">
             <label htmlFor={`metadata-${currentKey}-value`}>Value:</label>
-            <input
-              name={`metadata-${currentKey}-value`}
-              type="text"
-              value={edittedMetadata[currentKey].value}
-              onChange={(evt) => handleValueChange(evt, currentKey)}
-            />
+            <input name={`metadata-${currentKey}-value`} type="text" value={edittedMetadata[currentKey].value} onChange={(evt) => handleValueChange(evt, currentKey)} />
           </div>
         </div>
       ))}
@@ -301,12 +280,7 @@ export const WidgetInformationDisplay = ({ widget }) => {
           </div>
           <div className="metadata-label-input">
             <label htmlFor={`metadata-entry${index}-value`}>Value:</label>
-            <input
-              name={`metadata-entry${index}-value`}
-              type="text"
-              value={newEntry.value}
-              onChange={(evt) => handleNewEntryValueChange(evt, index)}
-            />
+            <input name={`metadata-entry${index}-value`} type="text" value={newEntry.value} onChange={(evt) => handleNewEntryValueChange(evt, index)} />
           </div>
           <button onClick={() => updateNewMetadataEntries((entries) => [...entries.slice(0, index), ...entries.slice(index + 1)])}>Remove</button>
         </div>
