@@ -57,6 +57,7 @@ export const PIXEL_CONVERSION = [
   "1px -> 0.0001px",
   "1px -> 0.00001px",
   "1px -> 0.000001px",
+  "CUSTOM",
 ];
 
 export const PIXEL_FORMATTER = {

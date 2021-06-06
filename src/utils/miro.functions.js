@@ -19,6 +19,14 @@ export const updateMiroWidget = async (id, metadata) =>
     },
   });
 
+export const showMiroNotification = (message) => {
+  miro.showNotification(message);
+};
+
+export const showMiroErrorNotification = (message) => {
+  miro.showErrorNotification(message);
+};
+
 export const getMiroWidgets = async (constraint) => {
   const widgets = await miro.board.widgets.get(constraint);
   return widgets;
