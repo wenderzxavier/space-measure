@@ -223,6 +223,10 @@ h2 {
   }
 }
 
+.content-wrapper {
+  flex-grow: 1;
+}
+
 .file-export {
   width: 100%;
 
@@ -245,4 +249,26 @@ h2 {
     margin-right: 2rem;
     padding: 5px;
   }
+}
+
+.tabs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0 1rem 0;
+  height: 4rem;
+}
+
+.tab-wrapper {
+  width: 30%;
+  padding: 0 1.8rem;
+}
+
+.tab-icon {
+  cursor: pointer;
+}
+
+.tab-active {
+  border-bottom: 3px solid blue;
 }

@@ -3,50 +3,72 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import SelectWidgetsPanel, { MetricScaleSelector, MetricUnitSelector, updateSelectedWidgets, WidgetCreationButtons } from "./apps/sidebar";
 import ExcelExporter from "./components/ExcelExporter";
+import TabSelector from "./components/TabSelector";
+import DescriptionTab from "./tabs/Description.tab";
+import OverviewTab from "./tabs/Overview.tab";
+import ConfigurationTab from "./tabs/Configuration.tab";
+
+import { TAB_CONFIG, TAB_DESCRIPTION, TAB_OVERVIEW } from "./utils/constants";
 
 import "./styles/app.scss";
 
 const App = () => {
-  const [selectedWidgets, setSelectedWidgets] = useState({ ungrouped: [] });
+  const [currentTab, setTab] = useState(TAB_OVERVIEW);
+  // const [selectedWidgets, setSelectedWidgets] = useState({ ungrouped: [] });
 
-  useEffect(() => {
-    setSelectionListener();
-    setWidgetTransformationUpdatedListener();
-    setWidgetCreatedListener();
-  }, []);
-
-  const setSelectionListener = () => {
-    miro.addListener("SELECTION_UPDATED", (event) => {
-      console.log(event);
-      updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
-        setSelectedWidgets(() => widgetsToDisplay);
-      });
-    });
+  const getTabContent = (tab) => {
+    switch (tab) {
+      case TAB_OVERVIEW:
+        return <OverviewTab />;
+      case TAB_DESCRIPTION:
+        return <DescriptionTab />;
+      case TAB_CONFIG:
+        return <ConfigurationTab />;
+      default:
+        break;
+    }
   };
 
-  const setWidgetTransformationUpdatedListener = () => {
-    miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (event) => {
-      console.log(event);
-      updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
-        setSelectedWidgets(() => widgetsToDisplay);
-      });
-    });
-  };
+  // useEffect(() => {
+  //   setSelectionListener();
+  //   setWidgetTransformationUpdatedListener();
+  //   setWidgetCreatedListener();
+  // }, []);
 
-  const setWidgetCreatedListener = () => {
-    miro.addListener("WIDGETS_CREATED", (event) => {
-      console.log(event);
-      updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
-        setSelectedWidgets(() => widgetsToDisplay);
-      });
-    });
-  };
+  // const setSelectionListener = () => {
+  //   miro.addListener("SELECTION_UPDATED", (event) => {
+  //     console.log(event);
+  //     updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
+  //       setSelectedWidgets(() => widgetsToDisplay);
+  //     });
+  //   });
+  // };
+
+  // const setWidgetTransformationUpdatedListener = () => {
+  //   miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (event) => {
+  //     console.log(event);
+  //     updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
+  //       setSelectedWidgets(() => widgetsToDisplay);
+  //     });
+  //   });
+  // };
+
+  // const setWidgetCreatedListener = () => {
+  //   miro.addListener("WIDGETS_CREATED", (event) => {
+  //     console.log(event);
+  //     updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
+  //       setSelectedWidgets(() => widgetsToDisplay);
+  //     });
+  //   });
+  // };
 
   return (
     <>
       <div className="App">
         <h2>Space Measure</h2>
-        <div className="scale-unit-selector">
+        <div className="content-wrapper">{getTabContent(currentTab)}</div>
+        <TabSelector currentTab={currentTab} changeTab={(tab) => setTab(tab)} />
+        {/* <div className="scale-unit-selector">
           <MetricScaleSelector />
           <MetricUnitSelector />
         </div>
@@ -54,7 +76,7 @@ const App = () => {
           <ExcelExporter />
         </div>
         <WidgetCreationButtons />
-        <SelectWidgetsPanel widgetsInfo={selectedWidgets} />
+        <SelectWidgetsPanel widgetsInfo={selectedWidgets} /> */}
       </div>
     </>
   );
