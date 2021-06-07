@@ -28,12 +28,5 @@ export const applyScale = (value) => {
 
 export const formatValue = (value = 0, scalar = LINEAR) => {
   const currentUnit = getScaleUnit();
-
-  const scaledValue = applyScale(value);
-
-  if (scaledValue > 0) {
-    return `${numberWithCommas(scaledValue.toFixed(2))} ${SCALE_UNITS_FORMATTER[currentUnit][scalar]}`;
-  }
-
-  return "-";
+  return `${numberWithCommas(value.toFixed(2))} ${SCALE_UNITS_FORMATTER[currentUnit][scalar]}`;
 };

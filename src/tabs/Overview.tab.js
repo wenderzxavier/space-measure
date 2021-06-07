@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import OverviewArea from "../components/OverviewArea";
-import OverviewMetadata from "../components/OverviewMetadata";
 import OverviewType from "../components/OverviewType";
 import * as constants from "../utils/constants";
 import { getMiroWidgets } from "../utils/miro.functions";
 
 import "../styles/overview-tab.scss";
+import WidgetCreator from "../components/WidgetCreator";
 
 const OverviewTab = () => {
   const [lines, setLines] = useState([]);
@@ -37,9 +37,9 @@ const OverviewTab = () => {
 
   return (
     <div className="overview-tab-wrapper">
+      <WidgetCreator />
       <OverviewType lines={lines} shapes={shapes} frames={frames} />
       <OverviewArea frames={frames} shapes={shapes} />
-      {/* <OverviewMetadata frames={frames} shapes={shapes} /> */}
       <span className="update-timestamp">Last update {getLastUpdate()}</span>
     </div>
   );

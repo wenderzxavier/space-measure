@@ -1,14 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
-import { ReactComponent as FullEllipse } from "../assets/full-ellipse.svg";
-import { ReactComponent as HalfEllipse } from "../assets/half-ellipse.svg";
-import { ReactComponent as QuarterEllipse } from "../assets/quarter-ellipse.svg";
-import { ReactComponent as FullTriangle } from "../assets/full-triangle.svg";
-import { ReactComponent as FullRectangle } from "../assets/full-rectangle.svg";
-import { ReactComponent as HalfTriangle } from "../assets/half-triangle.svg";
-import { ReactComponent as Parallelogram } from "../assets/parallelogram.svg";
-import { APP_ID, AVAILABLE_SHAPES, FULL, HALF, LINEAR, QUARTER, SHAPE_ICONS, SQUARE } from "../utils/constants";
-import { createShape } from "../widgetEvents/WidgetsCreated";
+import { APP_ID, LINEAR, SHAPE_ICONS, SQUARE } from "../utils/constants";
 import { getIdsFromWidgetsWithMetadata } from "../utils";
 import { formatValue } from "../utils/scale";
 import { getMiroWidgets, updateMiroWidget } from "../utils/miro.functions";
@@ -46,43 +38,6 @@ const formatWidgetsByGroup = async (widgetsIds) => {
     { ungrouped: [] }
   );
 };
-
-export const WidgetCreationButtons = () => (
-  <div className="widget-creation">
-    <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.ELLIPSE)}>
-      <FullEllipse />
-      Full Ellipse
-    </button>
-    <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.ELLIPSE)}>
-      <HalfEllipse />
-      Half Ellipse
-    </button>
-    <button onClick={() => createShape(QUARTER, AVAILABLE_SHAPES.ELLIPSE)}>
-      <QuarterEllipse />
-      Quarter Ellipse
-    </button>
-    <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.RECTANGLE)}>
-      <FullRectangle />
-      Full Quadrilateral
-    </button>
-    <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.PARALLELOGRAM)}>
-      <Parallelogram />
-      Full Parallelogram
-    </button>
-    <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.PARALLELOGRAM)}>
-      <Parallelogram />
-      Half Parallelogram
-    </button>
-    <button onClick={() => createShape(FULL, AVAILABLE_SHAPES.TRIANGLE)}>
-      <FullTriangle />
-      Full Triangle
-    </button>
-    <button onClick={() => createShape(HALF, AVAILABLE_SHAPES.TRIANGLE)}>
-      <HalfTriangle />
-      Half Triangle
-    </button>
-  </div>
-);
 
 export const updateSelectedWidgets = (widgets) => {
   try {

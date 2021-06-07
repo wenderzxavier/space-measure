@@ -18,20 +18,22 @@ export const initializeSidebarAndMenuItem = () =>
       },
       getWidgetMenuItems: (widgets) => {
         const infoToDisplay = infoForMenuItem(widgets);
+
         if (!infoToDisplay) {
           return Promise.resolve([]);
         }
+
         return Promise.resolve([
           {
             tooltip: "Space Measure",
             svgIcon: icon24,
             onClick: () => {
-              // const area = infoToDisplay.area !== 0 ? `Area :${formatValue(infoToDisplay.area, SQUARE)} | ` : "";
-              // const perimeter = infoToDisplay.perimeter !== 0 ? `Perimeter :${formatValue(infoToDisplay.perimeter, LINEAR)} | ` : "";
-              // const length = infoToDisplay.length !== 0 ? `Length :${formatValue(infoToDisplay.length, LINEAR)}` : "";
-              // const message = `${area}${perimeter}${length}`;
-              // message.length > 0 ? miro.showNotification(message) : miro.showErrorNotification("No information to display."")
-              // miro.showErrorNotification(`${message.length === 0 ? "No information to display." : message}`);
+              const area = infoToDisplay.area !== 0 ? `Area :${formatValue(infoToDisplay.area, SQUARE)} | ` : "";
+              const perimeter = infoToDisplay.perimeter !== 0 ? `Perimeter :${formatValue(infoToDisplay.perimeter, LINEAR)} | ` : "";
+              const length = infoToDisplay.length !== 0 ? `Length :${formatValue(infoToDisplay.length, LINEAR)}` : "";
+              const message = `${area}${perimeter}${length}`;
+
+              message.length > 0 ? miro.showNotification(message) : miro.showErrorNotification("No information to display.");
             },
           },
         ]);

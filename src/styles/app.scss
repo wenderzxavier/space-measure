@@ -25,42 +25,6 @@ h2 {
   font-weight: 500;
 }
 
-.widget-creation {
-  margin-top: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-
-  & button {
-    display: flex;
-    align-items: center;
-    width: 44%;
-    margin: 4px 0;
-    cursor: pointer;
-    text-align: left;
-    background-color: rgba(66, 98, 255, 1);
-    border: none;
-    font-family: OpenSans, Arial, Helvetica, sans-serif;
-    color: white;
-    padding: .4rem .5rem;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 4px;
-
-    &:hover {
-      background-color: rgba(69, 91, 237, 1);
-    }
-
-    & > svg {
-      width: 14px;
-      height: auto;
-      fill: white;
-      margin-right: 6px;
-    }
-  }
-}
-
 .selected-widgets-wrapper {
   margin: 0 auto;
   width: 100%;
@@ -215,6 +179,7 @@ h2 {
 
 .content-wrapper {
   flex-grow: 1;
+  overflow: scroll;
   width: 100%;
 }
 

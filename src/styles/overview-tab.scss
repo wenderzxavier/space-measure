@@ -38,11 +38,49 @@
     justify-content: space-between;
     width: 80%;
     margin: .5rem 2rem;
+
+    span {
+      max-width: 50%;
+    }
   }
 
   .update-timestamp {
     font-size: 0.8rem;
     margin: 2rem 0 .2rem 0;
     color: #888182;
+  }
+
+  .widget-creation-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2rem 0;
+
+    & button {
+      width: 4rem;
+      height: 4rem;
+      padding: .6rem;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      font-size: .6rem;
+      cursor: pointer;
+      margin: 1rem .4rem;
+      border: none;
+      border-radius: 4px;
+      background-color: rgba(69, 91, 237, 1);
+
+      &:hover {
+        background-color: #263386;
+      }
+
+      & > svg {
+        fill: white;
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 }

@@ -48,7 +48,7 @@ const trianglePerimeter = (base, height, areaType) => {
   return perimeter;
 };
 
-export const calculateLength = (x1, y1, x2, y2) => applyScale(Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
+export const calculateLength = (x1, y1, x2, y2) => Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
 // Check
 export const calculateAreaForShape = ({ shapeType, width, height, areaType }) => {
@@ -69,11 +69,11 @@ export const calculateAreaForShape = ({ shapeType, width, height, areaType }) =>
   }
 };
 
-export const calculatePerimeterForShape = ({ shape, width, height, areaType }) => {
+export const calculatePerimeterForShape = ({ shapeType, width, height, areaType }) => {
   const newWidth = applyScale(width);
   const newHeight = applyScale(height);
 
-  switch (shape) {
+  switch (shapeType) {
     case AVAILABLE_SHAPES.RECTANGLE:
       return parallelogramPerimeter(newWidth, newHeight);
     case AVAILABLE_SHAPES.TRIANGLE:

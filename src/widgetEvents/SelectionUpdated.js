@@ -1,4 +1,6 @@
+import { calculateAreaForShape, calculatePerimeterForShape } from "../utils/calcs";
 import { APP_ID, LINE, SHAPE } from "../utils/constants";
+import { applyScale } from "../utils/scale";
 
 const getWidgetsWithMetadata = (widgets = []) => {
   const widgetsWithMetadata = widgets.filter((widget) => widget.metadata.hasOwnProperty(APP_ID));
@@ -18,7 +20,7 @@ export const infoForMenuItem = (widgets) => {
   return widgetsWithMetadata.reduce(
     (accumulated, currentWidget) => {
       if (currentWidget.type === SHAPE) {
-        const { width, height, areaType, shapeType, count } = currentWidget.metadata[APP_ID];
+        const { count } = currentWidget.metadata[APP_ID];
 
         if (count) {
           return accumulated;
@@ -26,9 +28,8 @@ export const infoForMenuItem = (widgets) => {
 
         return {
           ...accumulated,
-          // Calcular Area e Perimetro aqui
-          // area: accumulated.area + area,
-          // perimeter: accumulated.perimeter + perimeter,
+          area: accumulated.area + calculateAreaForShape(currentWidget.metadata[APP_ID]),
+          perimeter: accumulated.perimeter + calculatePerimeterForShape(currentWidget.metadata[APP_ID]),
         };
       }
 
@@ -36,7 +37,7 @@ export const infoForMenuItem = (widgets) => {
         const { length } = currentWidget.metadata[APP_ID];
         return {
           ...accumulated,
-          length: accumulated.length + length,
+          length: accumulated.length + applyScale(length),
         };
       }
       return accumulated;
