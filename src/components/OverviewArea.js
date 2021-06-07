@@ -1,7 +1,7 @@
 import { filterWidgetsByIds, isShapeAvailable } from "../utils";
 import { calculateAreaForShape } from "../utils/calcs";
-import { APP_ID } from "../utils/constants";
-import { getScaleUnit } from "../utils/scale";
+import { APP_ID, SQUARE } from "../utils/constants";
+import { formatValue } from "../utils/scale";
 
 const OverviewArea = ({ frames, shapes }) => {
   const getTotalAreaForFrameWidgets = (ids) =>
@@ -24,10 +24,7 @@ const OverviewArea = ({ frames, shapes }) => {
           {frames.map((frame) => (
             <div className="section-content">
               <span>{`${frame.title} SHAPES`}</span>
-              <span>
-                {getTotalAreaForFrameWidgets(frame.childrenIds)}
-                {getScaleUnit()}
-              </span>
+              <span>{formatValue(getTotalAreaForFrameWidgets(frame.childrenIds), SQUARE)}</span>
             </div>
           ))}
         </>

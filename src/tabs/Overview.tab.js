@@ -5,6 +5,8 @@ import OverviewType from "../components/OverviewType";
 import * as constants from "../utils/constants";
 import { getMiroWidgets } from "../utils/miro.functions";
 
+import "../styles/overview-tab.scss";
+
 const OverviewTab = () => {
   const [lines, setLines] = useState([]);
   const [shapes, setShapes] = useState([]);
@@ -34,7 +36,7 @@ const OverviewTab = () => {
   }, []);
 
   return (
-    <div>
+    <div className="overview-tab-wrapper">
       <OverviewType lines={lines} shapes={shapes} frames={frames} />
       <OverviewArea frames={frames} shapes={shapes} />
       {/* <OverviewMetadata frames={frames} shapes={shapes} /> */}

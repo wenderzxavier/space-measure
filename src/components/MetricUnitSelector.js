@@ -12,13 +12,18 @@ const MetricUnitSelector = () => {
   };
 
   return (
-    <select value={selectedUnit} onChange={(evt) => handleChange(evt)} className="unit-selector">
-      {SCALE_UNITS.map((unit, index) => (
-        <option key={index} value={unit}>
-          {unit}
-        </option>
-      ))}
-    </select>
+    <div className="config-wrapper">
+      <label className="config-label" htmlFor="unit-selector">
+        Unit
+      </label>
+      <select value={selectedUnit} onChange={(evt) => handleChange(evt)} className="config-selector">
+        {SCALE_UNITS.map((unit, index) => (
+          <option key={index} value={unit}>
+            {unit}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 

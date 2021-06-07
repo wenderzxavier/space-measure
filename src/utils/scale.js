@@ -16,25 +16,24 @@ const numberWithCommas = (value) => {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-export const formatValue = (value = 0, scalar = LINEAR) => {
-  const currentUnit = getScaleUnit();
+export const applyScale = (value) => {
   const currentScale = getCurrentScale();
 
-  const scaledValue = value / PIXEL_FORMATTER[currentScale];
+  if (currentScale === "CUSTOM") {
+    return value * getCustomScale();
+  }
+
+  return value * PIXEL_FORMATTER[currentScale];
+};
+
+export const formatValue = (value = 0, scalar = LINEAR) => {
+  const currentUnit = getScaleUnit();
+
+  const scaledValue = applyScale(value);
 
   if (scaledValue > 0) {
     return `${numberWithCommas(scaledValue.toFixed(2))} ${SCALE_UNITS_FORMATTER[currentUnit][scalar]}`;
   }
 
   return "-";
-};
-
-export const applyScale = (value) => {
-  const currentScale = getCurrentScale();
-
-  if (currentScale === "CUSTOM") {
-    return value / getCustomScale();
-  }
-
-  return value / PIXEL_FORMATTER[currentScale];
 };

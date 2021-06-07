@@ -14,6 +14,7 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 h2 {
@@ -22,17 +23,6 @@ h2 {
   font-family: Formular, sans-serif;
   font-size: 24px;
   font-weight: 500;
-}
-
-.scale-unit-selector {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-
-  select {
-    padding: 2px 5px;
-    margin: 10px;
-  }
 }
 
 .widget-creation {
@@ -228,30 +218,6 @@ h2 {
   width: 100%;
 }
 
-.file-export {
-  width: 100%;
-
-  .excel-export-button {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 60%;
-    border: none;
-    background: #188038;
-    margin: 20px auto 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    color: white;
-  }
-
-  .excel-export-logo {
-    width: 2rem;
-    margin-right: 2rem;
-    padding: 5px;
-  }
-}
-
 .tabs {
   width: 100%;
   display: flex;
@@ -272,46 +238,4 @@ h2 {
 
 .tab-active {
   border-bottom: 3px solid blue;
-}
-
-.section-heading {
-  overflow: hidden;
-  text-align: center;
-
-  & span {
-    position: relative;
-    display: inline-block;
-
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      border-bottom: 2px solid;
-      width: 100%;
-      margin: 0 20px;
-    }
-
-    &::before {
-      right: 100%;
-    }
-
-    &::after {
-      left: 100%;
-    }
-  }
-}
-
-.section-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: .5rem 2rem;
-}
-
-.update-timestamp {
-  float: right;
-  font-size: 0.8rem;
-  margin: 2rem 0 .2rem 0;
-  color: #888182;
 }

@@ -9,14 +9,19 @@ export const MetricScaleSelector = ({ currentScale, onChangeScale }) => {
   };
 
   return (
-    <select value={currentScale} onChange={(evt) => handleChange(evt)} className="scale-selector">
-      <option disabled>Pixel Conversion</option>
-      {PIXEL_CONVERSION.map((unit, index) => (
-        <option key={index} value={unit}>
-          {unit}
-        </option>
-      ))}
-    </select>
+    <div className="config-wrapper">
+      <label className="config-label" htmlFor="scale-selector">
+        Scale
+      </label>
+      <select name="scale-selector" value={currentScale} onChange={(evt) => handleChange(evt)} className="config-selector">
+        <option disabled>Pixel Conversion</option>
+        {PIXEL_CONVERSION.map((unit, index) => (
+          <option key={index} value={unit}>
+            {unit}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 

@@ -1,17 +1,13 @@
-/* eslint-disable no-undef */
 import { ReactComponent as ExcelLogo } from "../assets/excel-logo.svg";
 import { FRAME, LINE, SHAPE } from "../utils/constants";
 import { updateFileContent } from "../utils/export";
+import { getMiroWidgets } from "../utils/miro.functions";
 
 const ExcelExporter = () => {
   const getAllBoardObjects = async () => {
-    const allLines = await miro.board.widgets.get({ type: LINE });
-    const allShapes = await miro.board.widgets.get({ type: SHAPE });
-    const allFrames = await miro.board.widgets.get({ type: FRAME });
-
-    console.log(allLines);
-    console.log(allShapes);
-    console.log(allFrames);
+    const allLines = await getMiroWidgets({ type: LINE });
+    const allShapes = await getMiroWidgets({ type: SHAPE });
+    const allFrames = await getMiroWidgets({ type: FRAME });
 
     return {
       frames: allFrames,
@@ -25,13 +21,14 @@ const ExcelExporter = () => {
 
     console.log(fileContent);
 
+    // eslint-disable-next-line no-undef
     alasql('SELECT * INTO XLSX("sample_file.xlsx",?) FROM ?', fileContent);
   };
 
   return (
     <button className="excel-export-button" onClick={handleSaveFile}>
       <ExcelLogo className="excel-export-logo" />
-      Save to File
+      Export Board to Excel
     </button>
   );
 };
