@@ -9,19 +9,20 @@ const HEIGHT = 200;
 
 // Check
 const addMetadataToShape = async (widgetId) => {
-  const widget = await miroFn.getMiroWidgets({ id: widgetId })[0];
-  if (isShapeAvailable(widget.style.shapeType)) {
-    miroFn.updateMiroWidget(widget.id, { width: widget.width, height: widget.height, areaType: FULL, shapeType: widget.style.shapeType });
+  let widget = await miroFn.getMiroWidgets({ id: widgetId });
+
+  if (isShapeAvailable(widget[0].style.shapeType)) {
+    miroFn.updateMiroWidget(widget[0].id, { width: widget[0].width, height: widget[0].height, areaType: FULL, shapeType: widget[0].style.shapeType });
   } else {
-    miroFn.updateMiroWidget(widget.id, { count: true, shapeType: widget.style.shapeType });
+    miroFn.updateMiroWidget(widget[0].id, { count: true, shapeType: widget[0].style.shapeType });
   }
 };
 
 const addMetadataToLine = async (widgetId) => {
-  const widget = await miroFn.getMiroWidgets({ id: widgetId })[0];
+  const widget = await miroFn.getMiroWidgets({ id: widgetId });
 
-  miroFn.updateMiroWidget(widget.id, {
-    length: calculateLength(widget.startPosition.x, widget.startPosition.y, widget.endPosition.x, widget.endPosition.y),
+  miroFn.updateMiroWidget(widget[0].id, {
+    length: calculateLength(widget[0].startPosition.x, widget[0].startPosition.y, widget[0].endPosition.x, widget[0].endPosition.y),
   });
 };
 
@@ -76,9 +77,9 @@ const addMetadataToWidget = (widgetId, widgetType) => {
 };
 
 // Check
-export const initWidgetMetadata = (event) => {
+export const initWidgetMetadata = (widgets) => {
   try {
-    const widget = event.data[0];
+    const widget = widgets[0];
     if (!widget.metadata[APP_ID]) {
       addMetadataToWidget(widget.id, widget.type);
     }

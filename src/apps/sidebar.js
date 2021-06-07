@@ -1,53 +1,8 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
-import { APP_ID, LINEAR, SHAPE_ICONS, SQUARE } from "../utils/constants";
-import { getIdsFromWidgetsWithMetadata } from "../utils";
+import { LINEAR, SHAPE_ICONS, SQUARE } from "../utils/constants";
 import { formatValue } from "../utils/scale";
-import { getMiroWidgets, updateMiroWidget } from "../utils/miro.functions";
-
-const formatWidgetsByGroup = async (widgetsIds) => {
-  const widgets = await Promise.all(
-    widgetsIds.map(async (widgetId) => {
-      return getMiroWidgets({ id: widgetId })[0];
-    })
-  );
-
-  return widgets.reduce(
-    (accumulated, currentWidget) => {
-      if (currentWidget && currentWidget.groupId) {
-        const accumulatedArea = accumulated[currentWidget.groupId]?.area || 0;
-        const accumulatedPerimeter = accumulated[currentWidget.groupId]?.perimeter || 0;
-        const accumulatedLength = accumulated[currentWidget.groupId]?.length || 0;
-        const accumulatedWidgets = accumulated[currentWidget.groupId]?.widgets || [];
-        return {
-          ...accumulated,
-          [currentWidget.groupId]: {
-            area: accumulatedArea + currentWidget.metadata[APP_ID].area,
-            perimeter: accumulatedPerimeter + currentWidget.metadata[APP_ID].perimeter,
-            length: accumulatedLength + currentWidget.metadata[APP_ID].length,
-            widgets: [...accumulatedWidgets, { id: currentWidget.id, ...currentWidget.metadata[APP_ID] }],
-          },
-        };
-      } else {
-        return {
-          ...accumulated,
-          ungrouped: [...accumulated.ungrouped, { id: currentWidget.id, ...currentWidget.metadata[APP_ID] }],
-        };
-      }
-    },
-    { ungrouped: [] }
-  );
-};
-
-export const updateSelectedWidgets = (widgets) => {
-  try {
-    const widgetsIds = getIdsFromWidgetsWithMetadata(widgets);
-
-    return formatWidgetsByGroup(widgetsIds);
-  } catch {
-    console.warn("An error occurred");
-  }
-};
+import { updateMiroWidget } from "../utils/miro.functions";
 
 const fomatMetadataToUpdate = (edittedEntries, newEntries) => {
   const formatEdittedEntries = Object.values(edittedEntries).reduce((accumulated, currentValue) => {

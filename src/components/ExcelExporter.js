@@ -26,10 +26,15 @@ const ExcelExporter = () => {
   };
 
   return (
-    <button className="excel-export-button" onClick={handleSaveFile}>
-      <ExcelLogo className="excel-export-logo" />
-      Export Board to Excel
-    </button>
+    <>
+      <h3 className="section-heading">
+        <span>Type</span>
+      </h3>
+      <button className="excel-export-button" onClick={handleSaveFile}>
+        <ExcelLogo className="excel-export-logo" />
+        Export Board to Excel
+      </button>
+    </>
   );
 };
 

@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import SelectWidgetsPanel, { MetricScaleSelector, MetricUnitSelector, updateSelectedWidgets, WidgetCreationButtons } from "./apps/sidebar";
-import ExcelExporter from "./components/ExcelExporter";
 import TabSelector from "./components/TabSelector";
 import DescriptionTab from "./tabs/Description.tab";
 import OverviewTab from "./tabs/Overview.tab";
@@ -14,7 +12,6 @@ import "./styles/app.scss";
 
 const App = () => {
   const [currentTab, setTab] = useState(TAB_OVERVIEW);
-  // const [selectedWidgets, setSelectedWidgets] = useState({ ungrouped: [] });
 
   const getTabContent = (tab) => {
     switch (tab) {
@@ -29,54 +26,12 @@ const App = () => {
     }
   };
 
-  // useEffect(() => {
-  //   setSelectionListener();
-  //   setWidgetTransformationUpdatedListener();
-  //   setWidgetCreatedListener();
-  // }, []);
-
-  // const setSelectionListener = () => {
-  //   miro.addListener("SELECTION_UPDATED", (event) => {
-  //     console.log(event);
-  //     updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
-  //       setSelectedWidgets(() => widgetsToDisplay);
-  //     });
-  //   });
-  // };
-
-  // const setWidgetTransformationUpdatedListener = () => {
-  //   miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (event) => {
-  //     console.log(event);
-  //     updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
-  //       setSelectedWidgets(() => widgetsToDisplay);
-  //     });
-  //   });
-  // };
-
-  // const setWidgetCreatedListener = () => {
-  //   miro.addListener("WIDGETS_CREATED", (event) => {
-  //     console.log(event);
-  //     updateSelectedWidgets(event.data).then((widgetsToDisplay) => {
-  //       setSelectedWidgets(() => widgetsToDisplay);
-  //     });
-  //   });
-  // };
-
   return (
     <>
       <div className="App">
         <h2>Space Measure</h2>
         <div className="content-wrapper">{getTabContent(currentTab)}</div>
         <TabSelector currentTab={currentTab} changeTab={(tab) => setTab(tab)} />
-        {/* <div className="scale-unit-selector">
-          <MetricScaleSelector />
-          <MetricUnitSelector />
-        </div>
-        <div className="file-export">
-          <ExcelExporter />
-        </div>
-        <WidgetCreationButtons />
-        <SelectWidgetsPanel widgetsInfo={selectedWidgets} /> */}
       </div>
     </>
   );
