@@ -28,7 +28,7 @@ const ExcelExporter = () => {
   return (
     <>
       <h3 className="section-heading">
-        <span>Type</span>
+        <span>Export</span>
       </h3>
       <button className="excel-export-button" onClick={handleSaveFile}>
         <ExcelLogo className="excel-export-logo" />

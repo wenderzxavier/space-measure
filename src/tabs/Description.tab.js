@@ -4,6 +4,8 @@ import { initSelectionUpdatedListener } from "../utils/miro.functions";
 import WidgetInformation from "../components/WidgetInformation";
 import GroupedWidgetsInformation from "../components/GroupedWidgetsInformation";
 
+import "../styles/description-tab.scss";
+
 const DescriptionTab = () => {
   const [widgetToDisplay, setWidgets] = useState({ ungrouped: [] });
 

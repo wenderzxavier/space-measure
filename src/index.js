@@ -24,6 +24,7 @@ miro.onReady(async () => {
   updateShapesWidthHeight(allShapes);
   updateLinesLengths(allLines);
 
+  console.log(allLines);
   miroFn.initSelectionUpdatedListener(console.log);
   miroFn.initWidgetsCreatedListener(initWidgetMetadata);
   miroFn.initWidgetTransformatioUpdatedListener(initMetadataUpdate);

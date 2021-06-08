@@ -137,6 +137,12 @@ export const TAB_ICONS = {
   ),
 };
 
+export const LINE_ICON = (
+  <svg viewBox="0 0 24 24" id="newlayout__link-line" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M4.707 20.707l16-16a1 1 0 10-1.414-1.414l-16 16a1 1 0 001.414 1.414z"></path>
+  </svg>
+);
+
 export const SHAPE_ICONS = {
   // Arrow Left
   13: (
