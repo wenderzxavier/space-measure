@@ -29,7 +29,7 @@ const addMetadataToLine = async (widgetId) => {
 // Check
 export const createShape = async (areaType = FULL, shape = AVAILABLE_SHAPES.RECTANGLE) => {
   try {
-    const boardCenter = miroFn.getMiroViewport();
+    const boardCenter = await miroFn.getMiroViewport();
     const positionX = boardCenter.x + boardCenter.width / 2;
     const positionY = boardCenter.y + boardCenter.height / 2;
     miroFn.createMiroWidget({
@@ -53,7 +53,7 @@ export const createShape = async (areaType = FULL, shape = AVAILABLE_SHAPES.RECT
       y: positionY,
     });
 
-    miroFn.getMiroViewport({
+    await miroFn.getMiroViewport({
       viewport: { x: positionX, y: positionY },
     });
 

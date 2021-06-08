@@ -83,6 +83,6 @@ export const calculatePerimeterForShape = ({ shapeType, width, height, areaType 
     case AVAILABLE_SHAPES.PARALLELOGRAM:
       return parallelogramPerimeter(newWidth, newHeight);
     default:
-      return undefined;
+      return 0;
   }
 };

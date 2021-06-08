@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-// import { LINEAR, SQUARE } from "../utils/constants";
-// import { formatValue } from "../utils/scale";
+import { LINEAR, SQUARE } from "../utils/constants";
+import { showMiroErrorNotification, showMiroNotification } from "../utils/miro.functions";
+import { formatValue } from "../utils/scale";
 import { infoForMenuItem } from "../widgetEvents/SelectionUpdated";
 
 const icon24 =
@@ -33,7 +34,7 @@ export const initializeSidebarAndMenuItem = () =>
               const length = infoToDisplay.length !== 0 ? `Length :${formatValue(infoToDisplay.length, LINEAR)}` : "";
               const message = `${area}${perimeter}${length}`;
 
-              message.length > 0 ? miro.showNotification(message) : miro.showErrorNotification("No information to display.");
+              message.length > 0 ? showMiroNotification(message) : showMiroErrorNotification("No information to display.");
             },
           },
         ]);

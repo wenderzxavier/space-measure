@@ -1,8 +1,8 @@
+import { calculateAreaForShape, calculatePerimeterForShape } from "./calcs";
 import { APP_ID, LINE, LINEAR, SHAPE_NAME, SQUARE } from "./constants";
-import { formatValue } from "./scale";
+import { applyScale, formatValue } from "./scale";
 
-const filterWidgets = (widgetsToSearch, allWidgets) =>
-  allWidgets.filter((widget) => widgetsToSearch.includes(widget.id));
+const filterWidgets = (widgetsToSearch, allWidgets) => allWidgets.filter((widget) => widgetsToSearch.includes(widget.id));
 
 const newLine = { Widget: "", Area: "", Perimeter: "" };
 
@@ -47,33 +47,40 @@ const formatWidgetsByGroup = (widgets) =>
         const accumulatedWidgets = accumulated[currentWidget.groupId]?.Widgets || [];
         const accumulatedWidgetTexts = accumulated[currentWidget.groupId]?.Type || [];
 
-        const { area, perimeter, length, areaType, shapeType, ...otherProps } = currentWidget.metadata[APP_ID];
+        const { width, height, length, areaType, shapeType, ...otherProps } = currentWidget.metadata[APP_ID];
         const shapeName = shapeType ? SHAPE_NAME[shapeType] : LINE;
+
+        const area = calculateAreaForShape(currentWidget.metadata[APP_ID]) || 0;
+        const perimeter = calculatePerimeterForShape(currentWidget.metadata[APP_ID]) || 0;
+        const formattedLength = applyScale(length) || 0;
 
         return {
           ...accumulated,
           [currentWidget.groupId]: {
-            Area: accumulatedArea + (area || 0),
-            Perimeter: accumulatedPerimeter + (perimeter || 0),
-            Length: accumulatedLength + (length || 0),
+            Area: accumulatedArea + area,
+            Perimeter: accumulatedPerimeter + perimeter,
+            Length: accumulatedLength + formattedLength,
             Type: [...accumulatedWidgetTexts, currentWidget.plainText],
             Widgets: [
               ...accumulatedWidgets,
               {
                 Widget: currentWidget.type,
                 Type: currentWidget.plainText || shapeName,
-                Area: formatValue(area || 0, SQUARE),
-                Perimeter: formatValue(perimeter || 0, LINEAR),
-                Length: formatValue(length || 0, LINEAR),
+                Area: formatValue(area, SQUARE),
+                Perimeter: formatValue(perimeter, LINEAR),
+                Length: formatValue(length, LINEAR),
                 Other: otherProps,
               },
             ],
           },
         };
       } else {
-        const { area, perimeter, length, areaType, shapeType, ...otherProps } = currentWidget.metadata[APP_ID];
+        const { width, height, length, areaType, shapeType, ...otherProps } = currentWidget.metadata[APP_ID];
 
         const shapeName = shapeType ? SHAPE_NAME[shapeType] : LINE;
+        const area = calculateAreaForShape(currentWidget.metadata[APP_ID]) || 0;
+        const perimeter = calculatePerimeterForShape(currentWidget.metadata[APP_ID]) || 0;
+        const formattedLength = applyScale(length) || 0;
 
         return {
           ...accumulated,
@@ -82,9 +89,9 @@ const formatWidgetsByGroup = (widgets) =>
             {
               Widget: currentWidget.type,
               Type: currentWidget.plainText || shapeName,
-              Area: formatValue(area || 0, SQUARE),
-              Perimeter: formatValue(perimeter || 0, LINEAR),
-              Length: formatValue(length || 0, LINEAR),
+              Area: formatValue(area, SQUARE),
+              Perimeter: formatValue(perimeter, LINEAR),
+              Length: formatValue(formattedLength, LINEAR),
               Other: otherProps,
             },
           ],

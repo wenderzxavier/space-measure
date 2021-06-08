@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
 import { APP_ID } from "./constants";
 
-export const getMiroViewport = async (position = {}) => {
-  await miro.board.viewport.get(position);
-};
+export const getMiroViewport = async (position = {}) => await miro.board.viewport.get(position);
 
 export const createMiroWidget = async (data) => {
   await miro.board.widgets.create(data);
